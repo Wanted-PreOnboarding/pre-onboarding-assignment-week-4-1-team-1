@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --cache --write .",
     "lint": "eslint --cache .",
-    "postinstall": "husky install"
+    "postinstall": "husky install && cd client && npm i && cd ../server && npm i "
   },
   "keywords": [],
   "author": "",
