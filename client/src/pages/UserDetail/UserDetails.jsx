@@ -8,15 +8,15 @@ const UserDetails = () => {
   const params = useParams();
   const idx = params.id;
   const [user, setUser] = useState([]);
-  const [account, setAccount] = useState([]);
+  const [accounts, setAccounts] = useState([]);
 
   useEffect(() => {
     const getUserData = async () => {
       try {
         const data = await getUser(idx);
-        const accounts = await getAccount(data.id);
+        const accountsData = await getAccount(data.id);
         setUser(data);
-        setAccount(accounts);
+        setAccounts(accountsData);
       } catch (e) {
         throw e;
       }
@@ -27,7 +27,7 @@ const UserDetails = () => {
   return (
     <>
       <UserInfo user={user} />
-      <UserAccounts account={account} />
+      <UserAccounts accounts={accounts} />
     </>
   );
 };

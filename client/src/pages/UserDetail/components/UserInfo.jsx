@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Paper } from '@mui/material';
+import styled from '@emotion/styled';
 
 const UserInfo = ({ user }) => {
   const [userInfo, setUserInfo] = useState({});
@@ -29,9 +31,7 @@ const UserInfo = ({ user }) => {
   const gender = gender_origin === 1 || gender_origin === 3 ? '남성' : '여성';
 
   return (
-    <div>
-      <div>아이디: {id}</div>
-      <div>고유아이디: {uuid}</div>
+    <ContainerPaper square elevation={2}>
       <div>
         <img src={photo} alt="프로필 사진" />
       </div>
@@ -46,8 +46,16 @@ const UserInfo = ({ user }) => {
       <div>최근 로그인 시간: {last_login}</div>
       <div>생성 시간: {created_at}</div>
       <div>수정 시간: {updated_at}</div>
-    </div>
+    </ContainerPaper>
   );
 };
 
 export default UserInfo;
+
+const ContainerPaper = styled(Paper)`
+  margin: 10px;
+
+  & > div > img {
+    width: 160px;
+  }
+`;
