@@ -34,7 +34,13 @@ export const prefaceApi = createApi({
         url: 'users',
       }),
     }),
+    getAccounts: builder.query({
+      query: () => ({
+        url: 'accounts',
+      }),
+    }),
   }),
 });
 
-export const { useLoginUserQuery, useGetUsersQuery } = prefaceApi;
+export const { useLoginUserQuery, useGetUsersQuery, useSignupUserQuery, useGetAccountsQuery } =
+  prefaceApi;
