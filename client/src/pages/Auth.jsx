@@ -17,11 +17,7 @@ function Auth() {
 
   const onSubmitAuth = async e => {
     e.preventDefault();
-
     const res = await api.login(email, password);
-    if (res.status === 200) {
-      alert('로그인에 성공하였습니다.');
-    }
   };
 
   return (
