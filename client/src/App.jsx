@@ -1,23 +1,24 @@
 import React from 'react';
-// import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Auth from './pages/Auth';
 import Layout from './components/Layout';
-import Sample from './components/Sample';
+// import Sample from './components/Sample';
+import Home from './pages/Home';
 
-// import { getAccessToken } from './utils/token';
+import { getToken } from './utils/token';
 
 function App() {
   return (
     <div className="App">
-      <Auth />
-      <Layout>
-        {/**
-         * 예시 파일 입니다
-         * 이후 삭제할 예정입니다.
-         */}
-        <Sample />
-      </Layout>
+      {getToken()
+        ? <Layout>
+            <Routes>
+              <Route path='/' element={<Home />}/>
+            </Routes>
+          </Layout>
+        : <Auth />
+      }
     </div>
   );
 }

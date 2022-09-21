@@ -1,7 +1,9 @@
 import { baseUrl } from '../index';
-import { setAccessToken } from '../../utils/token';
+import { setToken } from '../../utils/token';
+import { Navigate } from 'react-router-dom';
 
 class Auth {
+  // 로그인
   async login(email, password) {
     try {
       const res = await baseUrl.post('/login', {
@@ -9,8 +11,8 @@ class Auth {
         password: password,
       });
 
-      setAccessToken(res.data.accessToken);
-      alert('로그인에 성공하였습니다.');
+      setToken(res.data.accessToken);
+      <Navigate to='/' {...alert('로그인에 성공하였습니다.')} />
 
       return res;
     } catch (error) {

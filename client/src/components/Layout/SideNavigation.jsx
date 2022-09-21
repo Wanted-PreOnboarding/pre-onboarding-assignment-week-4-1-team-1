@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { useTheme } from '@mui/material/styles';
 import {
   Drawer,
@@ -18,6 +19,8 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import LogoutIcon from '@mui/icons-material/Logout';
+
+import { getToken } from '../../utils/token';
 
 function SideNavigation({ width, createClickMenuHandler }) {
   const { palette } = useTheme();
@@ -75,7 +78,7 @@ function SideNavigation({ width, createClickMenuHandler }) {
           <ListItemIcon sx={{ color: 'white' }}>
             <LogoutIcon />
           </ListItemIcon>
-          <ListItemText primary="로그아웃" />
+          <ListItemText primary={getToken() ? '로그아웃' : '로그인'} />
         </ListItemButton>
       </List>
     </Drawer>
