@@ -10,10 +10,7 @@ function App() {
   return (
     <div className="App">
       <Auth />
-      <Layout>
-
-      </Layout>
-      
+      <Layout></Layout>
     </div>
   );
 }

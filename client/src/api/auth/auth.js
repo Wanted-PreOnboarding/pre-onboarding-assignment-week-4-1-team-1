@@ -1,4 +1,4 @@
-import  { baseUrl }  from '../index';
+import { baseUrl } from '../index';
 import { setAccessToken } from '../../utils/token';
 
 class Auth {
@@ -13,7 +13,6 @@ class Auth {
       alert('로그인에 성공하였습니다.');
 
       return res;
-
     } catch (error) {
       alert('로그인에 실패하였습니다.');
     }
