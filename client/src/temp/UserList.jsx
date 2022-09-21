@@ -4,13 +4,12 @@ import User from './User';
 
 const UserList = () => {
   const [userList, setUserList] = useState([]);
-  console.log(userList);
 
   useEffect(() => {
     const Users = async () => {
       try {
-        const data = await getUsers();
-        setUserList(data);
+        const getUserListData = await getUsers();
+        setUserList(getUserListData);
       } catch (e) {
         console.log('에러났쥬', e);
       }
