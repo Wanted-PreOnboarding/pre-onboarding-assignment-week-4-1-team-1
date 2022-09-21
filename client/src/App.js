@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Sample from './components/Sample';
-import UserDetails from './pages/UserDetails';
+import UserDetails from './pages/UserDetail/UserDetails';
 import UserList from './temp/UserList';
 
 function App() {
