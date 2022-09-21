@@ -1604,6 +1604,11 @@
       "email": "johndoe@gmail.com",
       "password": "$2a$10$S1lc7YVxOa665dc9Zr3LrONBD/Q2x2v0NmfiWbQfsDfHf9l3r8VWi",
       "id": 101
+    },
+    {
+      "email": "newface@dco.com",
+      "password": "$2a$10$xQG9CJ/hcktNfBTwH/EO4emSQOBKnvOj2.YwP6zKUv09hDME7ozqC",
+      "id": 102
     }
   ],
   "userSetting": [
