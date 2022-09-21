@@ -19,7 +19,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-function SideNavigation({ width }) {
+function SideNavigation({ width, createClickMenuHandler }) {
   const { palette } = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -37,7 +37,7 @@ function SideNavigation({ width }) {
       </Toolbar>
       <Divider />
       <List>
-        <ListItemButton>
+        <ListItemButton onClick={createClickMenuHandler('대쉬보드')}>
           <ListItemIcon sx={{ color: 'white' }}>
             <DashboardIcon />
           </ListItemIcon>
@@ -57,7 +57,7 @@ function SideNavigation({ width }) {
         </ListItemButton>
         <Collapse in={open}>
           <List>
-            <ListItemButton sx={{ pl: 4 }}>
+            <ListItemButton sx={{ pl: 4 }} onClick={createClickMenuHandler('투자 계좌')}>
               <ListItemIcon sx={{ color: 'white' }}>
                 <ShowChartIcon />
               </ListItemIcon>
@@ -65,7 +65,7 @@ function SideNavigation({ width }) {
             </ListItemButton>
           </List>
         </Collapse>
-        <ListItemButton>
+        <ListItemButton onClick={createClickMenuHandler('사용자')}>
           <ListItemIcon sx={{ color: 'white' }}>
             <PersonIcon />
           </ListItemIcon>
