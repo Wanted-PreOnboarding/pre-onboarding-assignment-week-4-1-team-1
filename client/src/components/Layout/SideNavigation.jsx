@@ -33,8 +33,7 @@ function SideNavigation({ width }) {
       PaperProps={{ sx: { backgroundColor: palette.primary.dark, width, color: 'white' } }}
     >
       <Toolbar>
-        <Typography>(LOGO)</Typography>
-        <Typography>PREFACE</Typography>
+        <Typography sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}>PREFACE</Typography>
       </Toolbar>
       <Divider />
       <List>
