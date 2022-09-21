@@ -22,8 +22,8 @@ function App() {
         <Sample />
         <Routes>
           <Route path="/" element={<UserList />} />
-          <Route path="/login" element={<Auth />} />
           <Route path="/users/details/:id" element={<UserDetails />} />
+          <Route path="/" element={<Auth />} exact />
         </Routes>
       </Layout>
     </div>

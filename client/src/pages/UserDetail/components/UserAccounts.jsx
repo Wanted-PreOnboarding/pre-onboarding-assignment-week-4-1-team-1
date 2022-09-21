@@ -17,7 +17,6 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const UserAccounts = ({ accounts }) => {
   const [accountsInfo, setAccountsInfo] = useState([]);
-  console.log(accounts);
 
   useEffect(() => {
     if (accounts) setAccountsInfo(accounts);
@@ -45,7 +44,7 @@ const UserAccounts = ({ accounts }) => {
         </TableHead>
         <TableBody>
           {accountsInfo.map(account => (
-            <Row key={account.name} account={account} />
+            <Row key={account.uuid} account={account} />
           ))}
         </TableBody>
       </Table>
