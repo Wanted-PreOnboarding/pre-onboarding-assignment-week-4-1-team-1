@@ -1,14 +1,14 @@
 import { baseUrl } from '../index';
-import { setAccessToken } from "../../utils/token";
+import { setAccessToken } from '../../utils/token';
 
 class Auth {
   async login(email, password) {
     const res = await baseUrl.post('/login', {
       email: email,
-      password: password
-    })
+      password: password,
+    });
 
-    if(res.status === 200) {
+    if (res.status === 200) {
       setAccessToken(res.data.accessToken);
     }
 

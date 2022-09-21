@@ -6,23 +6,23 @@ import api from '../api/auth/auth';
 
 function Auth() {
   const [email, setEmail] = useState('');
-  const onEmailHandler = (e) => {
+  const onEmailHandler = e => {
     setEmail(e.target.value);
-  }
+  };
 
   const [password, setPassword] = useState('');
-  const onPasswordHandler = (e) => {
+  const onPasswordHandler = e => {
     setPassword(e.target.value);
-  }
+  };
 
-  const onSubmitAuth = async (e) => {
+  const onSubmitAuth = async e => {
     e.preventDefault();
-    
-    const res = await api.login(email, password)
+
+    const res = await api.login(email, password);
     if (res.status === 200) {
       alert('로그인에 성공하였습니다.');
     }
-  }
+  };
 
   return (
     <Container>
@@ -32,7 +32,7 @@ function Auth() {
         id="standard-basic"
         label="아이디"
         variant="standard"
-        type='email'
+        type="email"
         value={email}
         onChange={onEmailHandler}
       />
@@ -40,16 +40,15 @@ function Auth() {
         id="standard-basic"
         label="비밀번호"
         variant="standard"
-        type='password'
+        type="password"
         value={password}
         onChange={onPasswordHandler}
-        />
+      />
 
       <form onSubmit={onSubmitAuth}>
-        <Button
-          variant="contained"
-          type='submit'
-          >로그인</Button>
+        <Button variant="contained" type="submit">
+          로그인
+        </Button>
       </form>
     </Container>
   );
