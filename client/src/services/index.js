@@ -1,28 +1,37 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { getAccessToken } from '../utils/token';
 
 export const prefaceApi = createApi({
   reducerPath: 'prefaceApi',
   baseQuery: fetchBaseQuery({
     baseUrl: '/',
+    prepareHeaders: headers => {
+      const token = getAccessToken();
+      if (token) headers.set('Authorization', `Bearer ${token}`);
+
+      headers.set('Content-type', 'application/json');
+      return headers;
+    },
   }),
 
   endpoints: builder => ({
+    signupUser: builder.query({
+      query: newUser => ({
+        url: 'signup',
+        method: 'POST',
+        body: newUser,
+      }),
+    }),
     loginUser: builder.query({
-      query: payload => ({
+      query: user => ({
         url: 'login',
         method: 'POST',
-        body: payload,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
+        body: user,
       }),
     }),
     getUsers: builder.query({
       query: () => ({
         url: 'users',
-        headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwiaWF0IjoxNjYzNzUzNjcwLCJleHAiOjE2NjM3NTcyNzAsInN1YiI6IjEwMSJ9.JZxORgcokM0I2BD-_-hMU9At0RZ7mWfcr-XJCRlscTA`,
-        },
       }),
     }),
   }),
