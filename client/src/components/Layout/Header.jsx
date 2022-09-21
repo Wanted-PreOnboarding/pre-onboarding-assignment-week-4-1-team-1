@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Typography, Toolbar, IconButton, Avatar } from '@mui/material';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
-function Header() {
+function Header({ menu }) {
   return (
     <Toolbar>
       <Grid container alignItems="center" justifyContent="space-between">
@@ -10,7 +10,7 @@ function Header() {
           <IconButton>
             <MenuOpenIcon />
           </IconButton>
-          <Typography>(선택된 메뉴 페이지)</Typography>
+          <Typography>{menu}</Typography>
         </Grid>
         <Grid item xs={2} container justifyContent="flex-end">
           <Avatar alt="" src="" sx={{}}>
