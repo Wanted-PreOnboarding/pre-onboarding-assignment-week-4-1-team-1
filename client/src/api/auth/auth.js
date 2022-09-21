@@ -12,7 +12,7 @@ class Auth {
       });
 
       setToken(res.data.accessToken);
-      <Navigate to='/' {...alert('로그인에 성공하였습니다.')} />
+      <Navigate to="/" {...alert('로그인에 성공하였습니다.')} />;
 
       return res;
     } catch (error) {

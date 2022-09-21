@@ -11,14 +11,15 @@ import { getToken } from './utils/token';
 function App() {
   return (
     <div className="App">
-      {getToken()
-        ? <Layout>
-            <Routes>
-              <Route path='/' element={<Home />}/>
-            </Routes>
-          </Layout>
-        : <Auth />
-      }
+      {getToken() ? (
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </Layout>
+      ) : (
+        <Auth />
+      )}
     </div>
   );
 }
