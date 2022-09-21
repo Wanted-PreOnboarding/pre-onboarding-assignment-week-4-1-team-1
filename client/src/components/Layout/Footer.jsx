@@ -1,7 +1,12 @@
 import React from 'react';
+import { Grid, Typography } from '@mui/material';
 
-function Footer() {
-  return <h1>footer</h1>;
+function Footer({ width }) {
+  return (
+    <Grid container justifyContent="center" sx={{ width }}>
+      <Typography>Copyright © December and Company Inc.</Typography>
+    </Grid>
+  );
 }
 
 export default Footer;

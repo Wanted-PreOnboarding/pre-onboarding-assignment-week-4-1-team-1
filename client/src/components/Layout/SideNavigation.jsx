@@ -19,7 +19,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-function SideNavigation() {
+function SideNavigation({ width }) {
   const { palette } = useTheme();
   const [open, setOpen] = useState(false);
 
@@ -30,7 +30,7 @@ function SideNavigation() {
   return (
     <Drawer
       variant="permanent"
-      PaperProps={{ sx: { backgroundColor: palette.primary.dark, width: 280, color: 'white' } }}
+      PaperProps={{ sx: { backgroundColor: palette.primary.dark, width, color: 'white' } }}
     >
       <Toolbar>
         <Typography>(LOGO)</Typography>
