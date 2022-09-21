@@ -10,9 +10,9 @@ function Layout({ children }) {
   const width = `calc(100% - ${navWidth}px)`;
 
   return (
-    <Box sx={{ width: '100%', ml: `${navWidth}px` }}>
+    <Box sx={{ width, ml: `${navWidth}px` }}>
       <SideNavigation width={navWidth} />
-      <Header width={width} />
+      <Header />
       {children}
       <Footer width={width} />
     </Box>

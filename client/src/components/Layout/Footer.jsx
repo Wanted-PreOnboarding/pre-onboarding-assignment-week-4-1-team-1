@@ -1,9 +1,9 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
 
-function Footer({ width }) {
+function Footer() {
   return (
-    <Grid container justifyContent="center" sx={{ width }}>
+    <Grid container justifyContent="center">
       <Typography>Copyright © December and Company Inc.</Typography>
     </Grid>
   );

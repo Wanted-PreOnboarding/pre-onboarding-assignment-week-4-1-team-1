@@ -2,9 +2,9 @@ import React from 'react';
 import { Grid, Typography, Toolbar, IconButton, Avatar } from '@mui/material';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
-function Header({ width }) {
+function Header() {
   return (
-    <Toolbar sx={{ width }}>
+    <Toolbar>
       <Grid container alignItems="center" justifyContent="space-between">
         <Grid item xs={10} container alignItems="center">
           <IconButton>
