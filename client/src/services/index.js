@@ -31,7 +31,7 @@ export const prefaceApi = createApi({
     }),
     getUsersByPage: builder.query({
       query: page => ({
-        url: `users/${page}`,
+        url: `users?_page=${page}`,
       }),
     }),
     searchUser: builder.query({
