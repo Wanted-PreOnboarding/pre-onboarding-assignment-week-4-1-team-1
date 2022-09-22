@@ -1,8 +1,11 @@
 import React from 'react';
-import { useGetUsersByPageQuery } from '../services';
+import { useGetUsersByPageQuery } from '../services/user';
+import { useGetAccountsByPageQuery } from '../services/account';
 
 function Sample() {
   const { data: users, isLoading } = useGetUsersByPageQuery(1);
+  const { data: accounts } = useGetAccountsByPageQuery(1);
+  console.log(accounts);
 
   if (isLoading) return null;
   return (
