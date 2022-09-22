@@ -2,8 +2,9 @@ import React from 'react';
 import { useGetUsersByPageQuery } from '../services';
 
 function Sample() {
-  const { data: users } = useGetUsersByPageQuery(1);
-  console.log(users);
+  const { data: users, isLoading } = useGetUsersByPageQuery(1);
+
+  if (isLoading) return null;
   return (
     <div>
       <h1>Sample page</h1>
@@ -14,7 +15,7 @@ function Sample() {
             <br />
             <span>name : {name}</span>
             <br />
-            <sapn>phone number : {phone_number}</sapn>
+            <span>phone number : {phone_number}</span>
             <hr />
           </li>
         ))}
