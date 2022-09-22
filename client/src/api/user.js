@@ -1,15 +1,26 @@
 import instance from './index';
+import { getToken } from '../utils/token';
 
-class User {
+class Users {
   // 사용자 목록
   async getUsers() {
-    const res = await instance.get('/users');
+    const res = await instance.get('/users', {
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    });
     return res;
   }
 
-  // 계좌 검색
-  async detailUsers(id) {
+  // 사용자 상세
+  async detailUser(id) {
     const res = await instance.get(`users/${id}`);
+    return res;
+  }
+
+  // 사용자 계좌 조회
+  async getUserAccount(user_id) {
+    const res = await instance.get(`/accounts?user_id=${user_id}`);
     return res;
   }
 
@@ -38,4 +49,4 @@ class User {
   }
 }
 
-export default new User();
+export default new Users();

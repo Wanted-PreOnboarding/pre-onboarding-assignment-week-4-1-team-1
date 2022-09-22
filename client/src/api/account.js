@@ -1,12 +1,12 @@
 import instance from './index';
-import { setToken } from '../utils/token';
+import { getToken } from '../utils/token';
 
-class Account {
+class Accounts {
   // 계좌 목록
   async getAccounts() {
     const res = await instance.get('/accounts', {
       headers: {
-        Authorization: `Bearer ${setToken}`,
+        Authorization: `Bearer ${getToken}`,
       },
     });
     return res;
@@ -31,4 +31,4 @@ class Account {
   }
 }
 
-export default new Account();
+export default new Accounts();

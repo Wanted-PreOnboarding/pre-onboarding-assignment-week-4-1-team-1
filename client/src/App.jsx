@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Auth from './pages/Auth';
 import Layout from './components/Layout';
+
 import UserDetails from './pages/UserDetail/UserDetails';
 import UserList from './temp/UserList';
 
