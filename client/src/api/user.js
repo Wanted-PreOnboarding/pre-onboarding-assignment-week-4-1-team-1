@@ -6,8 +6,8 @@ class Users {
   async getUsers() {
     const res = await instance.get('/users', {
       headers: {
-        Authorization: `Bearer ${getToken()}`
-      }
+        Authorization: `Bearer ${getToken()}`,
+      },
     });
     return res;
   }

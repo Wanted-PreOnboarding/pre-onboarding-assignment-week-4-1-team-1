@@ -9,12 +9,10 @@ const UserList = () => {
 
   useEffect(() => {
     const Users = async () => {
-      
       try {
         // const getUserListData = await getUsers();
         const res = await api.getUsers();
         setUserList(res.data);
-        
       } catch (e) {
         console.log('에러났쥬', e);
       }
