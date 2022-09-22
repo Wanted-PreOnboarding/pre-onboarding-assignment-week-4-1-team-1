@@ -1,4 +1,3 @@
-// 사용자이름 중간 마스킹
 export const maskingName = strName => {
   if (strName.length > 2) {
     let originName = strName.split('');
@@ -14,7 +13,6 @@ export const maskingName = strName => {
   }
 };
 
-// 휴대폰 중앙 4자리 마스킹
 export const maskingPhoneNumber = phoneNumber => {
   return phoneNumber.replace(/\-.*\-/, '-****-');
 };
