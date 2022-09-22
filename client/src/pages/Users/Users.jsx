@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import baseUrl from '../../api';
 import { getToken } from '../../utils/token';
 
+import qs from 'query-string';
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -13,20 +14,27 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 function Users() {
   const token = getToken();
 
   const [userList, setUserList] = useState([]);
 
+  let totalUsers = 0;
+  const LIMIT = '4';
+
   const getUsers = async () => {
-    const res = await baseUrl.get('/users/?_page=1&_limit=4', {
+    const qs = window.location.search;
+    const res = await baseUrl.get(`/users/${qs}`, {
       headers: {
         Authorization: 'Bearer ' + token,
       },
     });
 
     setUserList(res.data);
+    totalUsers = res.headers['x-total-count'];
   };
 
   //   const getAccountCount = async userId => {
@@ -58,9 +66,25 @@ function Users() {
     return phoneNumber.replace(/\-.*\-/, '-****-');
   };
 
+  const [nextPage, setNextPage] = useState();
+
+  const navigate = useNavigate();
+
+  const onChangePage = e => {
+    navigate(`/users/?_page=${e.target.textContent}&_limit=${LIMIT}`);
+  };
+
+  const [pages, setPages] = useState(0);
+
+  const searchParams = useLocation().search;
+  const query = qs.parse(searchParams);
+  const curPage = query._page;
+
   useEffect(() => {
-    getUsers();
-  }, []);
+    getUsers().then(() => {
+      setPages(Math.ceil(totalUsers / +LIMIT));
+    });
+  }, [curPage]);
 
   return (
     <Box>
@@ -112,6 +136,9 @@ function Users() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Stack spacing={1}>
+        <Pagination count={pages} onChange={onChangePage} variant="outlined" shape="rounded" />
+      </Stack>
     </Box>
   );
 }
