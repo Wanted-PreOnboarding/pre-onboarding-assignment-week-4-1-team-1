@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import baseUrl from '../../api';
 import { getToken } from '../../utils/token';
-import { maskingName, maskingPhoneNumber } from '../../utils/masking';
+import TableBodyList from './components/TableBodyList';
 
 import qs from 'query-string';
 import { Box } from '@mui/material';
@@ -18,17 +18,16 @@ import Paper from '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
-function Users() {
-  const token = getToken();
+const token = getToken();
 
+function Users() {
   const [userList, setUserList] = useState([]);
 
   let totalUsers = 0;
   const LIMIT = '4';
 
   const getUsers = async () => {
-    const qs = window.location.search;
-    const res = await baseUrl.get(`/users/${qs}`, {
+    const res = await baseUrl.get(`/users/${searchParams}`, {
       headers: {
         Authorization: 'Bearer ' + token,
       },
@@ -37,16 +36,6 @@ function Users() {
     setUserList(res.data);
     totalUsers = res.headers['x-total-count'];
   };
-
-  //   const getAccountCount = async userId => {
-  //     const res = await baseUrl.get(`/accounts/?user_id=${userId}`, {
-  //       headers: {
-  //         Authorization: 'Bearer ' + token,
-  //       },
-  //     });
-
-  //     return res.data.length
-  //   };
 
   const navigate = useNavigate();
 
@@ -87,30 +76,7 @@ function Users() {
           <TableBody>
             {userList.length
               ? userList.map((user, key) => {
-                  //getAccountCount(user.id);
-
-                  return (
-                    <StyledTableRow key={key}>
-                      <StyledTableCell align="center">{maskingName(user.name)}</StyledTableCell>
-                      <StyledTableCell align="center">아직</StyledTableCell>
-                      <StyledTableCell align="center">{user.email}</StyledTableCell>
-                      <StyledTableCell align="center">{user.gender_origin}</StyledTableCell>
-                      <StyledTableCell align="center">
-                        {user.birth_date.slice(0, 10)}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {maskingPhoneNumber(user.phone_number)}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">
-                        {user.last_login.slice(0, 10)}
-                      </StyledTableCell>
-                      <StyledTableCell align="center">아직</StyledTableCell>
-                      <StyledTableCell align="center">아직</StyledTableCell>
-                      <StyledTableCell align="center">
-                        {user.created_at.slice(0, 10)}
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  );
+                  return <TableBodyList user={user} key={key} curPage={curPage} />;
                 })
               : '데이터없음'}
           </TableBody>
@@ -132,15 +98,5 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 12,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
   },
 }));
