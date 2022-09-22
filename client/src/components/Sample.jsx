@@ -3,11 +3,13 @@ import { useGetUsersByPageQuery } from '../services/user';
 import { useGetAccountsByPageQuery } from '../services/account';
 
 function Sample() {
-  const { data: users, isLoading } = useGetUsersByPageQuery(1);
-  const { data: accounts } = useGetAccountsByPageQuery(1);
-  console.log(accounts);
-
+  const { data: usersData, isLoading } = useGetUsersByPageQuery(1);
   if (isLoading) return null;
+
+  const { users, meta } = usersData;
+  const { totalLength } = meta;
+  console.log(totalLength);
+
   return (
     <div>
       <h1>Sample page</h1>
