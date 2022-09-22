@@ -20,5 +20,8 @@
     "eslint-plugin-react": "^7.31.8",
     "husky": "^8.0.1",
     "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "query-string": "^7.1.1"
   }
 }
