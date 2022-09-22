@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getToken } from '../utils/token';
 
-export const prefaceApi = createApi({
-  reducerPath: 'prefaceApi',
+export const userApi = createApi({
+  reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
     baseUrl: '/',
     prepareHeaders: headers => {
@@ -15,20 +15,6 @@ export const prefaceApi = createApi({
   }),
 
   endpoints: builder => ({
-    signupUser: builder.query({
-      query: newUser => ({
-        url: 'signup',
-        method: 'POST',
-        body: newUser,
-      }),
-    }),
-    loginUser: builder.query({
-      query: user => ({
-        url: 'login',
-        method: 'POST',
-        body: user,
-      }),
-    }),
     getUsersByPage: builder.query({
       query: page => ({
         url: `users?_page=${page}`,
@@ -90,12 +76,10 @@ export const prefaceApi = createApi({
 });
 
 export const {
-  useLoginUserQuery,
-  useSignupUserQuery,
   useCreateUserQuery,
   useDeleteUserQuery,
   useEditUserQuery,
-  useSearchUserQuery,
   useGetFilterdUsersQuery,
   useGetUsersByPageQuery,
-} = prefaceApi;
+  useSearchUserQuery,
+} = userApi;
