@@ -33,7 +33,7 @@ function SideNavigation({ width, createClickMenuHandler }) {
     localStorage.clear();
     alert('로그아웃이 완료되었습니다.');
     window.location.reload();
-  }
+  };
 
   return (
     <Drawer
@@ -83,10 +83,7 @@ function SideNavigation({ width, createClickMenuHandler }) {
           <ListItemIcon sx={{ color: 'white' }}>
             <LogoutIcon />
           </ListItemIcon>
-          <ListItemText
-            primary='로그아웃'
-            onClick={onLogoutHandler}
-          />
+          <ListItemText primary="로그아웃" onClick={onLogoutHandler} />
         </ListItemButton>
       </List>
     </Drawer>

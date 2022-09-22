@@ -8,17 +8,7 @@ import Layout from './components/Layout';
 import { getToken } from './utils/token';
 
 function App() {
-  return (
-    <div className="App">
-      
-      {getToken() ? (
-        <Layout>
-        </Layout>
-      ) : (
-        <Auth />
-      )}
-    </div>
-  );
+  return <div className="App">{getToken() ? <Layout></Layout> : <Auth />}</div>;
 }
 
 export default App;

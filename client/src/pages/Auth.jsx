@@ -22,7 +22,7 @@ function Auth() {
       const res = await api.login(email, password);
 
       setToken(res.data.accessToken);
-      alert('로그인에 성공하였습니다.')
+      alert('로그인에 성공하였습니다.');
       window.location.reload();
     } catch (error) {
       alert('로그인에 실패하였습니다.');
