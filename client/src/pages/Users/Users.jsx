@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import baseUrl from '../../api';
 import { getToken } from '../../utils/token';
+import { maskingName, maskingPhoneNumber } from '../../utils/masking';
 
 import qs from 'query-string';
 import { Box } from '@mui/material';
@@ -46,27 +47,6 @@ function Users() {
 
   //     return res.data.length
   //   };
-
-  const maskingName = strName => {
-    if (strName.length > 2) {
-      let originName = strName.split('');
-      originName.forEach(function (name, i) {
-        if (i === 0 || i === originName.length - 1) return;
-        originName[i] = '*';
-      });
-      let joinName = originName.join();
-      return joinName.replace(/,/g, '');
-    } else {
-      let pattern = /.$/; // 정규식
-      return strName.replace(pattern, '*');
-    }
-  };
-
-  const maskingPhoneNumber = phoneNumber => {
-    return phoneNumber.replace(/\-.*\-/, '-****-');
-  };
-
-  const [nextPage, setNextPage] = useState();
 
   const navigate = useNavigate();
 
