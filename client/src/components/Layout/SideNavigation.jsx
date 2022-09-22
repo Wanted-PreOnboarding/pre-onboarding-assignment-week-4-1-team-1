@@ -20,8 +20,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import { getToken } from '../../utils/token';
-
 function SideNavigation({ width, createClickMenuHandler }) {
   const { palette } = useTheme();
   const [open, setOpen] = useState(false);
@@ -29,6 +27,13 @@ function SideNavigation({ width, createClickMenuHandler }) {
   const handleClickOpen = () => {
     setOpen(prevOpen => !prevOpen);
   };
+
+  // 로그아웃
+  const onLogoutHandler = () => {
+    localStorage.clear();
+    alert('로그아웃이 완료되었습니다.');
+    window.location.reload();
+  }
 
   return (
     <Drawer
@@ -78,7 +83,10 @@ function SideNavigation({ width, createClickMenuHandler }) {
           <ListItemIcon sx={{ color: 'white' }}>
             <LogoutIcon />
           </ListItemIcon>
-          <ListItemText primary={getToken() ? '로그아웃' : '로그인'} />
+          <ListItemText
+            primary='로그아웃'
+            onClick={onLogoutHandler}
+          />
         </ListItemButton>
       </List>
     </Drawer>

@@ -3,7 +3,7 @@ export const setToken = token => {
   localStorage.setItem('token', token);
 };
 
-// 로그인 여부
+// 토큰 여부
 export const getToken = () => {
-  return !!localStorage.getItem('token');
+  return localStorage.getItem('token');
 };
