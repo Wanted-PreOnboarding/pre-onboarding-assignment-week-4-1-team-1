@@ -10,17 +10,17 @@ import { getToken } from './utils/token';
 function App() {
   return (
     <div className="App">
-      {
-        getToken()
-        ? <Layout>
-            <Routes>
-              <Route path='/' element={<Sample />}/>
-            </Routes>
-          </Layout>
-        : <Auth />
-      }
+      {getToken() ? (
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Sample />} />
+          </Routes>
+        </Layout>
+      ) : (
+        <Auth />
+      )}
     </div>
-  )
+  );
 }
 
 export default App;
