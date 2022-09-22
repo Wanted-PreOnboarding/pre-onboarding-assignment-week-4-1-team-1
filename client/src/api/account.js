@@ -6,8 +6,8 @@ class Account {
   async getAccounts() {
     const res = await instance.get('/accounts', {
       headers: {
-        Authorization: `Bearer ${setToken}`
-      }
+        Authorization: `Bearer ${setToken}`,
+      },
     });
     return res;
   }

@@ -1,7 +1,7 @@
 import instance from './index';
 
 class User {
-  // 사용자 목록 
+  // 사용자 목록
   async getUsers() {
     const res = await instance.get('/users');
     return res;
