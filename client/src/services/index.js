@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { getAccessToken } from '../utils/token';
+import { getToken } from '../utils/token';
 
 export const prefaceApi = createApi({
   reducerPath: 'prefaceApi',
   baseQuery: fetchBaseQuery({
     baseUrl: '/',
     prepareHeaders: headers => {
-      const token = getAccessToken();
+      const token = getToken();
       if (token) headers.set('Authorization', `Bearer ${token}`);
 
       headers.set('Content-type', 'application/json');
