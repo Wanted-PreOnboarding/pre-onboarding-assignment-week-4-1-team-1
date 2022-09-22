@@ -20,10 +20,36 @@ const getAccountCount = async userId => {
   return res.data.length;
 };
 
+const checkMarketingPush = async uuid => {
+  const res = await baseUrl.get(`/userSetting/?uuid=${uuid}`, {
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+  });
+  return res.data[0].allow_marketing_push;
+};
+
+const checkIsActive = async uuid => {
+  const res = await baseUrl.get(`/userSetting/?uuid=${uuid}`, {
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+  });
+  return res.data[0].is_active;
+};
+
 function TableBodyList({ user, curPage }) {
   const [accountCount, setAccountCount] = useState(0);
+  const [marketing, setMarketing] = useState('X');
+  const [isActive, setIsActive] = useState('X');
   useEffect(() => {
     getAccountCount(user.id).then(res => setAccountCount(res));
+    checkMarketingPush(user.uuid).then(res => {
+      res === true ? setMarketing('O') : setMarketing('X');
+    });
+    checkIsActive(user.uuid).then(res => {
+      res === true ? setIsActive('O') : setIsActive('X');
+    });
   }, [curPage]);
 
   return (
@@ -35,8 +61,8 @@ function TableBodyList({ user, curPage }) {
       <StyledTableCell align="center">{user.birth_date.slice(0, 10)}</StyledTableCell>
       <StyledTableCell align="center">{maskingPhoneNumber(user.phone_number)}</StyledTableCell>
       <StyledTableCell align="center">{user.last_login.slice(0, 10)}</StyledTableCell>
-      <StyledTableCell align="center">아직</StyledTableCell>
-      <StyledTableCell align="center">아직</StyledTableCell>
+      <StyledTableCell align="center">{marketing}</StyledTableCell>
+      <StyledTableCell align="center">{isActive}</StyledTableCell>
       <StyledTableCell align="center">{user.created_at.slice(0, 10)}</StyledTableCell>
     </StyledTableRow>
   );
