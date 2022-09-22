@@ -1,3 +1,5 @@
+//사용사 상세 페이지 구현을 위한 임시 api 연결 파일입니다. 제출 전에 지우겠습니다.
+
 import axios from 'axios';
 
 const token = 'token';
