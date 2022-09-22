@@ -15,10 +15,15 @@ export const userApi = createApi({
   }),
 
   endpoints: builder => ({
+    //todo meta로 users의 전체 길이 전달
     getUsersByPage: builder.query({
       query: page => ({
         url: `users?_page=${page}`,
       }),
+      transformResponse: (res, meta, arg) => {
+        const totalLength = meta.response.headers.get('x-total-count');
+        return { users: res, meta: { totalLength } };
+      },
     }),
     searchUser: builder.query({
       query: word => ({

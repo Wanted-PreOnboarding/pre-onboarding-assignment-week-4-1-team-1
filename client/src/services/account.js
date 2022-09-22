@@ -15,15 +15,11 @@ export const accountApi = createApi({
   }),
 
   endpoints: builder => ({
-    getTotalAccouts: builder.query({
-      query: () => ({ url: 'accounts' }),
-    }),
     getAccountsByPage: builder.query({
       query: page => ({ url: `accounts?_page=${page}_limit=10` }),
       transformResponse: (res, meta, arg) => {
-        console.log('res.headers', res);
-        console.log('res', meta.response.headers.get('x-total-count'));
-        return res;
+        const totalLength = meta.response.headers.get('x-total-count');
+        return { accounts: res, meta: { totalLength } };
       },
     }),
     searchAccount: builder.query({
@@ -32,5 +28,4 @@ export const accountApi = createApi({
   }),
 });
 
-export const { useGetAccountsByPageQuery, useGetTotalAccoutsQuery, useSearchAccountQuery } =
-  accountApi;
+export const { useGetAccountsByPageQuery, useSearchAccountQuery } = accountApi;
