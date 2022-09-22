@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import { Box } from '@mui/material';
 import Header from './Header';
@@ -19,6 +20,7 @@ function Layout({ children }) {
     <Box sx={{ width, ml: `${navWidth}px` }}>
       <SideNavigation width={navWidth} createClickMenuHandler={createClickMenuHandler} />
       <Header menu={menu} />
+      <Outlet />
       {children}
       <Footer width={width} />
     </Box>
