@@ -7,7 +7,7 @@ const router = jsonServer.router('db.json')
 
 app.db = router.db
 const rules = auth.rewriter({
-  users: 660,
+  customers: 660,
   userSetting: 660,
   accounts: 660,
 })

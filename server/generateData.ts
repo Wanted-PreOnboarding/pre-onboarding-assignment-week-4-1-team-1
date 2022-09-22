@@ -5,7 +5,7 @@ const accountStatus = require('./accountStatus.json')
 
 faker.setLocale('ko')
 
-const users = []
+const customers = []
 const userSetting = []
 const accounts = []
 
@@ -16,7 +16,7 @@ for (let i = 1; i < 101; i++) {
   // generate fake users and settings
   const id = faker.datatype.number()
   const uuid = faker.datatype.uuid()
-  const user = {
+  const customer = {
     id: i,
     uuid,
     photo: faker.internet.avatar(),
@@ -42,7 +42,7 @@ for (let i = 1; i < 101; i++) {
     created_at: faker.date.between('2019-04-01', '2022-08-01'),
     updated_at: faker.date.between('2019-04-01', '2022-08-01'),
   }
-  users.push(user)
+  customers.push(customer)
   userSetting.push(setting)
 
   // generate fake accounts
@@ -67,6 +67,6 @@ for (let i = 1; i < 101; i++) {
   }
 }
 
-const data = { users, userSetting, accounts }
+const data = { customers, userSetting, accounts }
 fs.writeFileSync('db.json', JSON.stringify(data))
 console.log('...generated db.json')
