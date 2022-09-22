@@ -1,8 +1,8 @@
-import { baseUrl } from '../index';
+import instance from './index';
 
 class Auth {
   async login(email, password) {
-    const res = await baseUrl.post('/login', {
+    const res = await instance.post('/login', {
       email: email,
       password: password,
     });
