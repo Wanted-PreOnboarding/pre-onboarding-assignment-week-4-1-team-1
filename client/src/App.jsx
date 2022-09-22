@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Auth from './pages/Auth';
+import Users from './pages/Users/Users';
 import Layout from './components/Layout';
 import Sample from './components/Sample';
 
@@ -13,6 +14,7 @@ function App() {
       {getToken() ? (
         <Layout>
           <Routes>
+            <Route path="/users" element={<Users />} />
             <Route path="/" element={<Sample />} />
           </Routes>
         </Layout>
