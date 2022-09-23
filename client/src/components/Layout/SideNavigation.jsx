@@ -15,20 +15,12 @@ import {
 
 import PersonIcon from '@mui/icons-material/Person';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import ShowChartIcon from '@mui/icons-material/ShowChart';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 function SideNavigation({ width, createClickMenuHandler }) {
   const { palette } = useTheme();
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(prevOpen => !prevOpen);
-  };
 
   // 로그아웃
   const onLogoutHandler = () => {
@@ -49,29 +41,15 @@ function SideNavigation({ width, createClickMenuHandler }) {
       </Toolbar>
       <Divider />
       <List>
-        <StyledLink>
-          <ListItemButton onClick={handleClickOpen}>
+        <StyledLink to="accounts">
+          <ListItemButton>
             <ListItemIcon sx={{ color: 'white' }}>
               <AccountBalanceIcon />
             </ListItemIcon>
             <ListItemText primary="계좌 목록" />
-            <ListItemIcon sx={{ color: 'white' }}>
-              {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            </ListItemIcon>
+            <ListItemIcon sx={{ color: 'white' }} />
           </ListItemButton>
         </StyledLink>
-        <Collapse in={open}>
-          <List>
-            <StyledLink to="accounts">
-              <ListItemButton sx={{ pl: 4 }} onClick={createClickMenuHandler('투자 계좌')}>
-                <ListItemIcon sx={{ color: 'white' }}>
-                  <ShowChartIcon />
-                </ListItemIcon>
-                <ListItemText primary="투자 계좌" />
-              </ListItemButton>
-            </StyledLink>
-          </List>
-        </Collapse>
         <StyledLink to="users?_page=1&_limit=4">
           <ListItemButton onClick={createClickMenuHandler('사용자')}>
             <ListItemIcon sx={{ color: 'white' }}>
