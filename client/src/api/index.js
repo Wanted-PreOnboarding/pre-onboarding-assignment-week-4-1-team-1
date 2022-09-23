@@ -1,7 +1,9 @@
 import axios from 'axios';
+import { getToken } from '../utils/token';
 
-export const baseUrl = axios.create({
-  baseUrl: 'localhost:4000',
+const instance = axios.create({
+  baseUrl: '/',
+  headers: { Authorization: `Bearer ${getToken()}` },
 });
 
-export default baseUrl;
+export default instance;
