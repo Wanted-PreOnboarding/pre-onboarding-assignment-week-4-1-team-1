@@ -12,13 +12,15 @@ import {
   ListItemText,
   ListItemIcon,
 } from '@mui/material';
-import DashboardIcon from '@mui/icons-material/Dashboard';
+
 import PersonIcon from '@mui/icons-material/Person';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { Link } from 'react-router-dom';
+import styled from '@emotion/styled';
 
 function SideNavigation({ width, createClickMenuHandler }) {
   const { palette } = useTheme();
@@ -41,44 +43,43 @@ function SideNavigation({ width, createClickMenuHandler }) {
       PaperProps={{ sx: { backgroundColor: palette.primary.dark, width, color: 'white' } }}
     >
       <Toolbar>
-        <Typography sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}>PREFACE</Typography>
+        <StyledLink to="/">
+          <Typography sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}>PREFACE</Typography>
+        </StyledLink>
       </Toolbar>
       <Divider />
       <List>
-        <ListItemButton onClick={createClickMenuHandler('대쉬보드')}>
-          <ListItemIcon sx={{ color: 'white' }}>
-            <DashboardIcon />
-          </ListItemIcon>
-          <ListItemText primary="대쉬보드" />
-        </ListItemButton>
-      </List>
-      <Divider />
-      <List>
-        <ListItemButton onClick={handleClickOpen}>
-          <ListItemIcon sx={{ color: 'white' }}>
-            <AccountBalanceIcon />
-          </ListItemIcon>
-          <ListItemText primary="계좌 목록" />
-          <ListItemIcon sx={{ color: 'white' }}>
-            {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-          </ListItemIcon>
-        </ListItemButton>
+        <StyledLink>
+          <ListItemButton onClick={handleClickOpen}>
+            <ListItemIcon sx={{ color: 'white' }}>
+              <AccountBalanceIcon />
+            </ListItemIcon>
+            <ListItemText primary="계좌 목록" />
+            <ListItemIcon sx={{ color: 'white' }}>
+              {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            </ListItemIcon>
+          </ListItemButton>
+        </StyledLink>
         <Collapse in={open}>
           <List>
-            <ListItemButton sx={{ pl: 4 }} onClick={createClickMenuHandler('투자 계좌')}>
-              <ListItemIcon sx={{ color: 'white' }}>
-                <ShowChartIcon />
-              </ListItemIcon>
-              <ListItemText primary="투자 계좌" />
-            </ListItemButton>
+            <StyledLink to="accounts">
+              <ListItemButton sx={{ pl: 4 }} onClick={createClickMenuHandler('투자 계좌')}>
+                <ListItemIcon sx={{ color: 'white' }}>
+                  <ShowChartIcon />
+                </ListItemIcon>
+                <ListItemText primary="투자 계좌" />
+              </ListItemButton>
+            </StyledLink>
           </List>
         </Collapse>
-        <ListItemButton onClick={createClickMenuHandler('사용자')}>
-          <ListItemIcon sx={{ color: 'white' }}>
-            <PersonIcon />
-          </ListItemIcon>
-          <ListItemText primary="사용자" />
-        </ListItemButton>
+        <StyledLink to="users?_page=1&_limit=4">
+          <ListItemButton onClick={createClickMenuHandler('사용자')}>
+            <ListItemIcon sx={{ color: 'white' }}>
+              <PersonIcon />
+            </ListItemIcon>
+            <ListItemText primary="사용자" />
+          </ListItemButton>
+        </StyledLink>
         <ListItemButton>
           <ListItemIcon sx={{ color: 'white' }}>
             <LogoutIcon />
@@ -91,3 +92,8 @@ function SideNavigation({ width, createClickMenuHandler }) {
 }
 
 export default SideNavigation;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+`;
