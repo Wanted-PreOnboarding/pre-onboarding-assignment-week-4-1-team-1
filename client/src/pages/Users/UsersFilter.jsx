@@ -35,31 +35,44 @@ function UsersFilter() {
   let totalUsers = 0;
   const LIMIT = '4';
 
+  const getFilterUser = uuidFilterArray => {
+    getUsers().then(res => {
+      const users = res.filter(val => uuidFilterArray.includes(val.uuid));
+      setUserList(users);
+    });
+  };
+
   const getUsers = async () => {
-    console.log(searchParams);
-    const res = await baseUrl.get(`/${searchParams}`, {
+    const res = await baseUrl.get(`/customers`, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    return res.data;
+  };
+
+  const getUuid = async () => {
+    const res = await baseUrl.get(`/userSetting/${searchParams}`, {
       headers: {
         Authorization: 'Bearer ' + token,
       },
     });
 
-    const staff = res.data;
-    const staffUuid = staff.map(val => {
+    const uuidFilterArray = res.data.map(val => {
       return val.uuid;
     });
-    console.log(staffUuid);
+
+    getFilterUser(uuidFilterArray);
   };
 
-  const navigate = useNavigate();
-
   useEffect(() => {
-    getUsers();
+    getUuid();
   }, [searchParams]);
 
   return (
     <Box>
       <SearchBar />
-      <AddUser getUsers={getUsers} />
+      <AddUser getUsers={getUuid} />
       <FilterBotton checkStaff={checkStaff} checkActive={checkActive} />
       <TableContainer component={Paper}>
         <Table aria-label="customized table">
@@ -82,7 +95,7 @@ function UsersFilter() {
             {userList.length
               ? userList.map((user, key) => {
                   return (
-                    <TableBodyList user={user} key={key} curPage={curPage} getUsers={getUsers} />
+                    <TableBodyList user={user} key={key} curPage={curPage} getUsers={getUuid} />
                   );
                 })
               : '데이터없음'}
