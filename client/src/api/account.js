@@ -1,34 +1,11 @@
 import instance from './index';
-import { getToken } from '../utils/token';
+import accountService from '../services/account';
 
-class Accounts {
-  // 계좌 목록
-  async getAccounts() {
-    const res = await instance.get('/accounts', {
-      headers: {
-        Authorization: `Bearer ${getToken}`,
-      },
-    });
-    return res;
-  }
+const getAccountsByPage = (page = 1, filters = {}) =>
+  accountService.getAccountsByPage(page, filters);
 
-  // 계좌 페이지네이션
-  async getPageAccounts(page) {
-    const res = await instance.get(`/accounts?_page=${page}&_limit=20`);
-    return res;
-  }
+const searchAccounts = word => instance.get(`accounts/?q${word}`);
 
-  // 계좌 상세
-  async detailAccounts(id) {
-    const res = await instance.get(`accounts/${id}`);
-    return res;
-  }
+const getAnAccount = id => instance.get(`accounts/${id}`);
 
-  // 계좌 검색
-  async searchAccounts() {
-    const res = await instance.get('accounts?q=South');
-    return res;
-  }
-}
-
-export default new Accounts();
+export { getAccountsByPage, searchAccounts, getAnAccount };
