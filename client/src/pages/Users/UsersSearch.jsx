@@ -12,7 +12,6 @@ import AddUser from './components/AddUser';
 import FilterBotton from './components/FilterBotton';
 import TableHeadList from './components/TableHeadList';
 
-import qs from 'query-string';
 import { Box } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';

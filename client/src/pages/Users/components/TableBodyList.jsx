@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import baseUrl from '../../../api';
 import { getToken } from '../../../utils/token';
@@ -79,7 +80,7 @@ function TableBodyList({ user, curPage, getlist }) {
   return (
     <StyledTableRow>
       <StyledTableCell align="center">
-        {maskingName(user.name)}
+        <Link to={`/users/${user.id}`}>{maskingName(user.name)}</Link>
         {isEdit ? (
           <EditUserName user={user} onEditModeToggle={onEditModeToggle} getlist={getlist} />
         ) : (
