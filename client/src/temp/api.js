@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ld2ZhY2VAZGNvLmNvbSIsImlhdCI6MTY2MzkwNzQyMSwiZXhwIjoxNjYzOTExMDIxLCJzdWIiOiIxMDEifQ.DMSLATJj_yzs21eb9-HvedBnmOnazJ3SKWDCQcE_gMo';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ld2ZhY2VAZGNvLmNvbSIsImlhdCI6MTY2MzkxMTI0NiwiZXhwIjoxNjYzOTE0ODQ2LCJzdWIiOiIxMDEifQ.r-24jE8wfHMoORM7IHj1aVJVYRZpWqOS1_OjvjpHHN8';
 
 async function getUsers() {
   try {

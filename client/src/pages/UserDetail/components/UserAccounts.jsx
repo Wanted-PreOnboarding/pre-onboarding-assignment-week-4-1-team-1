@@ -14,7 +14,7 @@ import {
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { transformToBrokerName } from '../../../utils/bankFormer';
+import { transformToBrokerResource } from '../../../utils/bankFormer';
 
 const UserAccounts = ({ accounts }) => {
   const [accountsInfo, setAccountsInfo] = useState([]);
@@ -59,6 +59,10 @@ function Row(props) {
   const { account } = props;
   const [open, setOpen] = React.useState(false);
 
+  const { brokerName, formattedAccount } = transformToBrokerResource(
+    account.broker_id,
+    account.number
+  );
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -70,9 +74,7 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {account.name}
         </TableCell>
-        <TableCell align="right">
-          {account.broker_id && transformToBrokerName(account.broker_id)}
-        </TableCell>
+        <TableCell align="right">{brokerName}</TableCell>
         <TableCell align="right">{account.status}</TableCell>
         <TableCell align="right">{account.assets - account.payments}</TableCell>
         <TableCell align="right">
@@ -102,7 +104,7 @@ function Row(props) {
                     <TableCell component="th" scope="row">
                       {account.is_active ? '활성화됨' : '비활성화됨'}
                     </TableCell>
-                    <TableCell>{account.number}</TableCell>
+                    <TableCell>{formattedAccount}</TableCell>
                     <TableCell align="right">{account.payments}</TableCell>
                     <TableCell align="right">{account.assets}</TableCell>
                     <TableCell align="right">{account.updated_at}</TableCell>
