@@ -14,8 +14,8 @@ import {
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { transformToBrokerResource } from '../../../utils/bankFormer';
-import { convertNumToStr } from '../../../utils/statusFormer';
+import { transformToBrokerResource } from '../../../utils/bankFormatter';
+import { convertNumToStr } from '../../../utils/statusFormatter';
 
 const UserAccounts = ({ accounts }) => {
   const [accountsInfo, setAccountsInfo] = useState([]);
