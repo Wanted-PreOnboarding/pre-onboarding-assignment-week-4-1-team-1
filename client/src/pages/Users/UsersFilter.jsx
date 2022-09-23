@@ -1,24 +1,25 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import baseUrl from '../../api';
 import { getToken } from '../../utils/token';
+import { divisionList } from '../../utils/divisionList';
+import { LiMIT_ITEM } from '../../utils/itemLimit';
+
 import TableBodyList from './components/TableBodyList';
 import SearchBar from './components/SearchBar';
 import AddUser from './components/AddUser';
 import FilterBotton from './components/FilterBotton';
 import TableHeadList from './components/TableHeadList';
 
-import qs from 'query-string';
 import { Box } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-
 import TableContainer from '@mui/material/TableContainer';
-
 import Paper from '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+
+import qs from 'query-string';
 
 const token = getToken();
 
@@ -30,25 +31,12 @@ function UsersFilter() {
   const checkStaff = query.is_staff;
   const checkActive = query.is_active;
 
-  const LIMIT = '4';
-
-  const divisionList = (arr, n) => {
-    const length = arr.length;
-    const cut = Math.floor(length / n) + (Math.floor(length % n) > 0 ? 1 : 0);
-    const tmp = [];
-
-    for (let i = 0; i < cut; i++) {
-      tmp.push(arr.splice(0, n));
-    }
-    return tmp;
-  };
-
   const [pages, setPages] = useState(0);
 
   const getFilterUser = uuidFilterArray => {
     getUserList().then(res => {
       const users = res.filter(val => uuidFilterArray.includes(val.uuid));
-      const li = divisionList(users, +LIMIT);
+      const li = divisionList(users, +LiMIT_ITEM);
       setPages(li.length);
       setUserList(li);
     });
@@ -80,7 +68,7 @@ function UsersFilter() {
   const [curPage, setCurPage] = useState(0);
 
   const onChangePage = e => {
-    setCurPage(e.target.textContent);
+    setCurPage(e.target.textContent - 1);
   };
 
   useEffect(() => {
@@ -90,7 +78,7 @@ function UsersFilter() {
   return (
     <Box>
       <SearchBar />
-      <AddUser getUsers={getUserUuid} />
+      <AddUser getlist={getUserUuid} />
       <FilterBotton checkStaff={checkStaff} checkActive={checkActive} />
       <TableContainer component={Paper}>
         <Table aria-label="customized table">
@@ -99,7 +87,7 @@ function UsersFilter() {
             {userList.length
               ? userList[curPage].map((user, key) => {
                   return (
-                    <TableBodyList user={user} key={key} curPage={curPage} getUsers={getUserUuid} />
+                    <TableBodyList user={user} key={key} curPage={curPage} getlist={getUserUuid} />
                   );
                 })
               : 'Loading...'}

@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import baseUrl from '../../api';
 import { getToken } from '../../utils/token';
+import { LiMIT_ITEM } from '../../utils/itemLimit';
+
 import TableBodyList from './components/TableBodyList';
 import SearchBar from './components/SearchBar';
 import AddUser from './components/AddUser';
@@ -27,7 +29,6 @@ function UsersList() {
   const curPage = query._page;
 
   let totalUsers = 0;
-  const LIMIT = '4';
 
   const getUsers = async () => {
     const res = await baseUrl.get(`/customers/${searchParams}`, {
@@ -43,21 +44,21 @@ function UsersList() {
   const navigate = useNavigate();
 
   const onChangePage = e => {
-    navigate(`/users/?_page=${e.target.textContent}&_limit=${LIMIT}`);
+    navigate(`/users/?_page=${e.target.textContent}&_limit=${LiMIT_ITEM}`);
   };
 
   const [pages, setPages] = useState(0);
 
   useEffect(() => {
     getUsers().then(() => {
-      setPages(Math.ceil(totalUsers / +LIMIT));
+      setPages(Math.ceil(totalUsers / +LiMIT_ITEM));
     });
   }, [searchParams]);
 
   return (
     <Box>
       <SearchBar />
-      <AddUser getUsers={getUsers} />
+      <AddUser getlist={getUsers} />
       <FilterBotton />
       <TableContainer component={Paper}>
         <Table aria-label="customized table">
@@ -66,7 +67,7 @@ function UsersList() {
             {userList.length
               ? userList.map((user, key) => {
                   return (
-                    <TableBodyList user={user} key={key} curPage={curPage} getUsers={getUsers} />
+                    <TableBodyList user={user} key={key} curPage={curPage} getlist={getUsers} />
                   );
                 })
               : 'Loading...'}

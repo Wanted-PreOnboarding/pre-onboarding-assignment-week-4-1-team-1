@@ -42,15 +42,18 @@ const checkIsActive = async uuid => {
   return res.data[0].is_active;
 };
 
-function TableBodyList({ user, curPage, getUsers }) {
+function TableBodyList({ user, curPage, getlist }) {
   const [accountCount, setAccountCount] = useState(0);
   const [marketing, setMarketing] = useState('X');
   const [isActive, setIsActive] = useState('X');
+
   useEffect(() => {
     getAccountCount(user.id).then(res => setAccountCount(res));
+
     checkMarketingPush(user.uuid).then(res => {
       res === true ? setMarketing('O') : setMarketing('X');
     });
+
     checkIsActive(user.uuid).then(res => {
       res === true ? setIsActive('O') : setIsActive('X');
     });
@@ -63,7 +66,7 @@ function TableBodyList({ user, curPage, getUsers }) {
           Authorization: 'Bearer ' + token,
         },
       });
-      getUsers();
+      getlist();
     }
   };
 
@@ -78,7 +81,7 @@ function TableBodyList({ user, curPage, getUsers }) {
       <StyledTableCell align="center">
         {maskingName(user.name)}
         {isEdit ? (
-          <EditUserName user={user} onEditModeToggle={onEditModeToggle} getUsers={getUsers} />
+          <EditUserName user={user} onEditModeToggle={onEditModeToggle} getlist={getlist} />
         ) : (
           <IconButton onClick={onEditModeToggle} aria-label="edit" size="small">
             <EditIcon fontSize="inherit" />
