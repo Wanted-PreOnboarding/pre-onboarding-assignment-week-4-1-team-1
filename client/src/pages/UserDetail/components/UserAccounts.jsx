@@ -15,6 +15,7 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { transformToBrokerResource } from '../../../utils/bankFormer';
+import { convertNumToStr } from '../../../utils/statusFormer';
 
 const UserAccounts = ({ accounts }) => {
   const [accountsInfo, setAccountsInfo] = useState([]);
@@ -75,7 +76,7 @@ function Row(props) {
           {account.name}
         </TableCell>
         <TableCell align="right">{brokerName}</TableCell>
-        <TableCell align="right">{account.status}</TableCell>
+        <TableCell align="right">{account.status && convertNumToStr(account.status)}</TableCell>
         <TableCell align="right">{account.assets - account.payments}</TableCell>
         <TableCell align="right">
           {(((account.assets - account.payments) / account.payments) * 100).toFixed(2)}%
