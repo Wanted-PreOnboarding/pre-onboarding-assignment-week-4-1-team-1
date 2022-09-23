@@ -14,7 +14,7 @@ class AccountService {
     }
   }
 
-  async getAccountsByPage(page = 1, filters = {}) {
+  async getAccountsByPage(page, filters) {
     this.init();
 
     let query = `accounts?_page=${page}&_limit=${this._limit}`;
@@ -28,16 +28,6 @@ class AccountService {
     const totalLength = headers['x-total-count'];
 
     return { data, meta: { totalLength } };
-  }
-
-  async searchAccounts(word) {
-    const { data } = await this._fetch.get(`/accounts?q=${word}`, {});
-    return data;
-  }
-
-  async getAnAccount(id) {
-    const { data } = await this._fetch.get(`/accounts/${id}`, {});
-    return data;
   }
 }
 
