@@ -3,20 +3,10 @@ import instance from '../api';
 class AccountService {
   constructor() {
     this._limit = 10;
-    this._accounts = null;
     this._fetch = instance;
   }
 
-  async init() {
-    if (!this._accounts) {
-      const { data } = await this._fetch.get('/accounts');
-      this._accounts = data;
-    }
-  }
-
   async getAccountsByPage(page, filters) {
-    this.init();
-    //? 브로커 네임을 어떻게 처리할 것인가.
     let query = `accounts?_page=${page}&_limit=${this._limit}`;
     const { isActive, brokerId, status } = filters;
 
