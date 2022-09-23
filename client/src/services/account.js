@@ -1,5 +1,4 @@
 import instance from '../api';
-import { getToken } from '../utils/token';
 
 class AccountService {
   constructor() {
@@ -33,13 +32,11 @@ class AccountService {
 
   async searchAccounts(word) {
     const { data } = await this._fetch.get(`/accounts?q=${word}`, {});
-    console.log(data);
     return data;
   }
 
   async getAnAccount(id) {
     const { data } = await this._fetch.get(`/accounts/${id}`, {});
-
     return data;
   }
 }
