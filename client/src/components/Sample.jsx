@@ -1,19 +1,19 @@
 import React from 'react';
-import { useGetUsersByPageQuery } from '../services/user';
-import { useGetAccountsByPageQuery } from '../services/account';
+// import { useGetUsersByPageQuery } from '../services/user';
+// import { useGetAccountsByPageQuery } from '../services/account';
 
 function Sample() {
-  const { data: usersData, isLoading } = useGetUsersByPageQuery(1);
-  if (isLoading) return null;
+  // const { data: usersData, isLoading } = useGetUsersByPageQuery(1);
+  // if (isLoading) return null;
 
-  const { users, meta } = usersData;
-  const { totalLength } = meta;
-  console.log(totalLength);
+  // const { users, meta } = usersData;
+  // const { totalLength } = meta;
+  // console.log(totalLength);
 
   return (
     <div>
       <h1>Sample page</h1>
-      <ul>
+      {/* <ul>
         {users.map(({ id, name, phone_number }) => (
           <li key={id}>
             <span>id : {id}</span>
@@ -24,7 +24,7 @@ function Sample() {
             <hr />
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }

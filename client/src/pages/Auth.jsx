@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
 import { TextField, Button } from '@mui/material/';
-import api from '../api/auth';
+import api from '../services/auth';
 import { setToken } from '../utils/token';
 
 function Auth() {
