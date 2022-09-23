@@ -7,7 +7,6 @@ import {
   Divider,
   Typography,
   List,
-  Collapse,
   ListItemButton,
   ListItemText,
   ListItemIcon,
