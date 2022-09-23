@@ -6,7 +6,6 @@ import Users from './pages/Users/Users';
 import Layout from './components/Layout';
 
 import UserDetails from './pages/UserDetail/UserDetails';
-import UserList from './temp/UserList';
 
 import { getToken } from './utils/token';
 
@@ -17,10 +16,10 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={token ? <Layout /> : <Auth />}>
-          <Route index element={<UserList />} />
+          <Route path="accounts" element={<></>} />
           <Route path="/users/customers" element={<Users />} />
           <Route path="/users" element={<Users />} />
-          <Route path="/users/details/:id" element={<UserDetails />} />
+          <Route path="/users/:id" element={<UserDetails />} />
         </Route>
       </Routes>
     </div>
