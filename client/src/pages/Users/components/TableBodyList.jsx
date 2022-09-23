@@ -3,10 +3,14 @@ import { useEffect, useState } from 'react';
 import baseUrl from '../../../api';
 import { getToken } from '../../../utils/token';
 import { maskingName, maskingPhoneNumber } from '../../../utils/masking';
+import EditUserName from './EditUserName';
 
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const token = getToken();
 
@@ -38,7 +42,7 @@ const checkIsActive = async uuid => {
   return res.data[0].is_active;
 };
 
-function TableBodyList({ user, curPage }) {
+function TableBodyList({ user, curPage, getUsers }) {
   const [accountCount, setAccountCount] = useState(0);
   const [marketing, setMarketing] = useState('X');
   const [isActive, setIsActive] = useState('X');
@@ -52,9 +56,35 @@ function TableBodyList({ user, curPage }) {
     });
   }, [curPage]);
 
+  const onDeleteUser = async id => {
+    if (window.confirm('정말 삭제합니까?')) {
+      await baseUrl.delete(`/customers/${id}`, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      });
+      getUsers();
+    }
+  };
+
+  const [isEdit, setIsEdit] = useState(false);
+
+  const onEditModeToggle = () => {
+    setIsEdit(prev => !prev);
+  };
+
   return (
     <StyledTableRow>
-      <StyledTableCell align="center">{maskingName(user.name)}</StyledTableCell>
+      <StyledTableCell align="center">
+        {maskingName(user.name)}
+        {isEdit ? (
+          <EditUserName user={user} onEditModeToggle={onEditModeToggle} getUsers={getUsers} />
+        ) : (
+          <IconButton onClick={onEditModeToggle} aria-label="edit" size="small">
+            <EditIcon fontSize="inherit" />
+          </IconButton>
+        )}
+      </StyledTableCell>
       <StyledTableCell align="center">{accountCount}</StyledTableCell>
       <StyledTableCell align="center">{user.email}</StyledTableCell>
       <StyledTableCell align="center">{user.gender_origin}</StyledTableCell>
@@ -64,6 +94,11 @@ function TableBodyList({ user, curPage }) {
       <StyledTableCell align="center">{marketing}</StyledTableCell>
       <StyledTableCell align="center">{isActive}</StyledTableCell>
       <StyledTableCell align="center">{user.created_at.slice(0, 10)}</StyledTableCell>
+      <StyledTableCell align="center">
+        <IconButton onClick={() => onDeleteUser(user.id)} aria-label="delete" size="small">
+          <DeleteIcon color="error" fontSize="inherit" />
+        </IconButton>
+      </StyledTableCell>
     </StyledTableRow>
   );
 }

@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import baseUrl from '../../api';
 import { getToken } from '../../utils/token';
 import TableBodyList from './components/TableBodyList';
+import SearchBar from './components/SearchBar';
+import AddUser from './components/AddUser';
 
 import qs from 'query-string';
 import { Box } from '@mui/material';
@@ -23,11 +25,15 @@ const token = getToken();
 function Users() {
   const [userList, setUserList] = useState([]);
 
+  const searchParams = useLocation().search;
+  const query = qs.parse(searchParams);
+  const curPage = query._page;
+
   let totalUsers = 0;
   const LIMIT = '4';
 
   const getUsers = async () => {
-    const res = await baseUrl.get(`/users/${searchParams}`, {
+    const res = await baseUrl.get(`/customers/${searchParams}`, {
       headers: {
         Authorization: 'Bearer ' + token,
       },
@@ -45,18 +51,16 @@ function Users() {
 
   const [pages, setPages] = useState(0);
 
-  const searchParams = useLocation().search;
-  const query = qs.parse(searchParams);
-  const curPage = query._page;
-
   useEffect(() => {
     getUsers().then(() => {
       setPages(Math.ceil(totalUsers / +LIMIT));
     });
-  }, [curPage]);
+  }, [searchParams]);
 
   return (
     <Box>
+      <SearchBar />
+      <AddUser getUsers={getUsers} />
       <TableContainer component={Paper}>
         <Table aria-label="customized table">
           <TableHead>
@@ -71,12 +75,15 @@ function Users() {
               <StyledTableCell align="center">수신동의 여부</StyledTableCell>
               <StyledTableCell align="center">활성화 여부</StyledTableCell>
               <StyledTableCell align="center">가입일</StyledTableCell>
+              <StyledTableCell align="center">삭제</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {userList.length
               ? userList.map((user, key) => {
-                  return <TableBodyList user={user} key={key} curPage={curPage} />;
+                  return (
+                    <TableBodyList user={user} key={key} curPage={curPage} getUsers={getUsers} />
+                  );
                 })
               : '데이터없음'}
           </TableBody>

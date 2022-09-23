@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getUsers } from './api';
 import User from './User';
-// import api from '../api/customers';
 
 //사용사 상세 페이지 구현을 위한 임시 리스트 아이템 컴포넌트입니다. 제출 전에 지우겠습니다.
 const UserList = () => {
