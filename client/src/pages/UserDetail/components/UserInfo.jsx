@@ -4,14 +4,16 @@ import styled from '@emotion/styled';
 import LabelAndContentBox from '../../../components/LabelAndContentBox';
 import { maskingName, maskingPhoneNumber } from '../../../utils/masking';
 
-const UserInfo = ({ user }) => {
+const UserInfo = ({ user, userSetting }) => {
   const [userInfo, setUserInfo] = useState({});
+  const [userSettingInfo, setSettingUserInfo] = useState({});
 
   useEffect(() => {
-    if (user) {
+    if (user && userSetting) {
       setUserInfo(user);
+      setSettingUserInfo(userSetting);
     }
-  }, [user]);
+  }, [user, userSetting]);
 
   const {
     id,
@@ -29,6 +31,8 @@ const UserInfo = ({ user }) => {
     created_at,
     updated_at,
   } = userInfo;
+
+  const { allow_marketing_push, allow_invest_push, is_active, is_staff } = userSettingInfo;
 
   const gender = gender_origin === 1 || gender_origin === 3 ? '남성' : '여성';
 
@@ -63,6 +67,20 @@ const UserInfo = ({ user }) => {
             <LabelAndContentBox label="최근 로그인 시간" content={last_login} contentColSpan="3" />
             <LabelAndContentBox label="생성 시간" content={created_at} contentColSpan="2" />
             <LabelAndContentBox label="수정 시간" content={updated_at} contentColSpan="2" />
+          </tr>
+          <tr>
+            <LabelAndContentBox
+              label="마케팅 동의"
+              content={allow_marketing_push ? 'O' : 'x'}
+              contentColSpan="2"
+            />
+            <LabelAndContentBox
+              label="투자 동의"
+              content={allow_invest_push ? 'O' : 'x'}
+              contentColSpan="2"
+            />
+            <LabelAndContentBox label="활성화 여부" content={is_active ? 'O' : 'x'} />
+            <LabelAndContentBox label="스태프" content={is_staff ? 'O' : 'x'} />
           </tr>
         </tbody>
       </table>
@@ -124,7 +142,7 @@ const ContainerPaper = styled(Paper)`
 
   & td {
     border: 1px solid #219ebc;
-    min-width: 50px;
+    min-width: 80px;
     text-align: center;
   }
 `;
