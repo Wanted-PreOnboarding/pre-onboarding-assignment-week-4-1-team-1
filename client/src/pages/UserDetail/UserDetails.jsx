@@ -21,7 +21,7 @@ const UserDetails = () => {
         ]);
         setUser(userData);
         setAccounts(accountData);
-        setUserSetting(userSettingData);
+        setUserSetting(userSettingData[0]);
       } catch (e) {
         throw e;
       }

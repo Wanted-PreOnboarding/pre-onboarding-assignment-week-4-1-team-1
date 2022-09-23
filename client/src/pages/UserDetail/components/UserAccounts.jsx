@@ -77,7 +77,7 @@ function Row(props) {
         </TableCell>
         <TableCell align="right">{brokerName}</TableCell>
         <TableCell align="right">{account.status && convertNumToStr(account.status)}</TableCell>
-        <TableCell align="right">{account.assets - account.payments}</TableCell>
+        <TableCell align="right">{(account.assets - account.payments).toFixed(2)}</TableCell>
         <TableCell align="right">
           {(((account.assets - account.payments) / account.payments) * 100).toFixed(2)}%
         </TableCell>
@@ -108,8 +108,8 @@ function Row(props) {
                     <TableCell>{formattedAccount}</TableCell>
                     <TableCell align="right">{account.payments}</TableCell>
                     <TableCell align="right">{account.assets}</TableCell>
-                    <TableCell align="right">{account.updated_at}</TableCell>
-                    <TableCell align="right">{account.created_at}</TableCell>
+                    <TableCell align="right">{account.updated_at?.slice(0, 16)}</TableCell>
+                    <TableCell align="right">{account.created_at?.slice(0, 16)}</TableCell>
                   </TableRow>
 
                   {/* {row.history.map((historyRow) => (
