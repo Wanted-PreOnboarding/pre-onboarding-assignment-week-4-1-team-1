@@ -14,6 +14,7 @@ import {
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { transformToBrokerName } from '../../../utils/bankFormer';
 
 const UserAccounts = ({ accounts }) => {
   const [accountsInfo, setAccountsInfo] = useState([]);
@@ -69,7 +70,9 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {account.name}
         </TableCell>
-        <TableCell align="right">{account.broker_id}</TableCell>
+        <TableCell align="right">
+          {account.broker_id && transformToBrokerName(account.broker_id)}
+        </TableCell>
         <TableCell align="right">{account.status}</TableCell>
         <TableCell align="right">{account.assets - account.payments}</TableCell>
         <TableCell align="right">
