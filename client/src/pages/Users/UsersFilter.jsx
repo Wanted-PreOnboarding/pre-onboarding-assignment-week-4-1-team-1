@@ -7,16 +7,15 @@ import TableBodyList from './components/TableBodyList';
 import SearchBar from './components/SearchBar';
 import AddUser from './components/AddUser';
 import FilterBotton from './components/FilterBotton';
+import TableHeadList from './components/TableHeadList';
 
 import qs from 'query-string';
 import { Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+
 import Paper from '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
@@ -28,21 +27,34 @@ function UsersFilter() {
 
   const searchParams = useLocation().search;
   const query = qs.parse(searchParams);
-  const curPage = query._page;
   const checkStaff = query.is_staff;
   const checkActive = query.is_active;
 
-  let totalUsers = 0;
   const LIMIT = '4';
 
+  const divisionList = (arr, n) => {
+    const length = arr.length;
+    const cut = Math.floor(length / n) + (Math.floor(length % n) > 0 ? 1 : 0);
+    const tmp = [];
+
+    for (let i = 0; i < cut; i++) {
+      tmp.push(arr.splice(0, n));
+    }
+    return tmp;
+  };
+
+  const [pages, setPages] = useState(0);
+
   const getFilterUser = uuidFilterArray => {
-    getUsers().then(res => {
+    getUserList().then(res => {
       const users = res.filter(val => uuidFilterArray.includes(val.uuid));
-      setUserList(users);
+      const li = divisionList(users, +LIMIT);
+      setPages(li.length);
+      setUserList(li);
     });
   };
 
-  const getUsers = async () => {
+  const getUserList = async () => {
     const res = await baseUrl.get(`/customers`, {
       headers: {
         Authorization: 'Bearer ' + token,
@@ -51,7 +63,7 @@ function UsersFilter() {
     return res.data;
   };
 
-  const getUuid = async () => {
+  const getUserUuid = async () => {
     const res = await baseUrl.get(`/userSetting/${searchParams}`, {
       headers: {
         Authorization: 'Bearer ' + token,
@@ -65,55 +77,38 @@ function UsersFilter() {
     getFilterUser(uuidFilterArray);
   };
 
+  const [curPage, setCurPage] = useState(0);
+
+  const onChangePage = e => {
+    setCurPage(e.target.textContent);
+  };
+
   useEffect(() => {
-    getUuid();
+    getUserUuid();
   }, [searchParams]);
 
   return (
     <Box>
       <SearchBar />
-      <AddUser getUsers={getUuid} />
+      <AddUser getUsers={getUserUuid} />
       <FilterBotton checkStaff={checkStaff} checkActive={checkActive} />
       <TableContainer component={Paper}>
         <Table aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell align="center">고객명</StyledTableCell>
-              <StyledTableCell align="center">보유계좌수</StyledTableCell>
-              <StyledTableCell align="center">이메일</StyledTableCell>
-              <StyledTableCell align="center">성별코드</StyledTableCell>
-              <StyledTableCell align="center">생년월일</StyledTableCell>
-              <StyledTableCell align="center">휴대폰 번호</StyledTableCell>
-              <StyledTableCell align="center">최근 로그인</StyledTableCell>
-              <StyledTableCell align="center">수신동의 여부</StyledTableCell>
-              <StyledTableCell align="center">활성화 여부</StyledTableCell>
-              <StyledTableCell align="center">가입일</StyledTableCell>
-              <StyledTableCell align="center">삭제</StyledTableCell>
-            </TableRow>
-          </TableHead>
+          <TableHeadList />
           <TableBody>
             {userList.length
-              ? userList.map((user, key) => {
+              ? userList[curPage].map((user, key) => {
                   return (
-                    <TableBodyList user={user} key={key} curPage={curPage} getUsers={getUuid} />
+                    <TableBodyList user={user} key={key} curPage={curPage} getUsers={getUserUuid} />
                   );
                 })
-              : '데이터없음'}
+              : 'Loading...'}
           </TableBody>
         </Table>
       </TableContainer>
+      <Pagination count={pages} onChange={onChangePage} variant="outlined" shape="rounded" />
     </Box>
   );
 }
 
 export default UsersFilter;
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 12,
-  },
-}));

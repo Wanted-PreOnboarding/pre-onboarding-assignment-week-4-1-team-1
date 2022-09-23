@@ -61,9 +61,9 @@ function AddUser({ getUsers }) {
       >
         <Box sx={style}>
           <form onSubmit={onSubmitUser} style={{ display: 'flex', flexDirection: 'column' }}>
-            <label for="avatar">사진 url :</label>
+            <label for="avatar">사진 url</label>
             <input type="text" id="avatar" name="avatar" required />
-            <label for="name">사용자 이름 :</label>
+            <label for="name">사용자 이름</label>
             <input
               type="text"
               id="name"
@@ -73,13 +73,13 @@ function AddUser({ getUsers }) {
               maxlength="14"
               size="10"
             />
-            <label for="email">이메일 :</label>
+            <label for="email">이메일</label>
             <input type="email" id="email" size="30" required />
-            <label for="age">나이 :</label>
+            <label for="age">나이</label>
             <input type="number" id="age" name="age" min="10" max="100" required />
-            <label for="sex">주민등록상 성별코드 :</label>
+            <label for="sex">주민등록상 성별코드</label>
             <input type="number" id="sex" name="sex" min="1" max="4" required />
-            <label for="birthday-time">생년월일시간:</label>
+            <label for="birthday-time">생년월일시간</label>
             <input
               type="datetime-local"
               id="birthday-time"
@@ -88,10 +88,10 @@ function AddUser({ getUsers }) {
               max="2022-06-14T00:00"
               required
             />
-            <label for="phone">휴대폰 번호 :</label>
+            <label for="phone">휴대폰 번호</label>
             <small>ex: 123-456-7890</small>
             <input type="tel" id="phone" name="phone" required />
-            <label for="address">주소 :</label>
+            <label for="address">주소</label>
             <small>ex: 서울시 분당구</small>
             <input
               type="text"
@@ -102,7 +102,7 @@ function AddUser({ getUsers }) {
               maxlength="20"
               size="10"
             />
-            <label for="detail">상세주소 :</label>
+            <label for="detail">상세주소</label>
             <small>ex: 0622 광명면 Suite 418</small>
             <input
               type="text"

@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Auth from './pages/Auth';
-import Users from './pages/Users/Users';
+import UsersList from './pages/Users/UsersList';
 import UsersFilter from './pages/Users/UsersFilter';
 import Layout from './components/Layout';
 
@@ -19,8 +19,8 @@ function App() {
         <Route path="/" element={token ? <Layout /> : <Auth />}>
           <Route path="accounts" element={<></>} />
           <Route path="/users/userSetting" element={<UsersFilter />} />
-          <Route path="/users/customers" element={<Users />} />
-          <Route path="/users" element={<Users />} />
+          <Route path="/users/customers" element={<UsersList />} />
+          <Route path="/users" element={<UsersList />} />
           <Route path="/users/:id" element={<UserDetails />} />
         </Route>
       </Routes>
