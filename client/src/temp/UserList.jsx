@@ -14,7 +14,7 @@ const UserList = () => {
         const res = await api.getUsers();
         setUserList(res.data);
       } catch (e) {
-        console.log('에러났쥬', e);
+        // console.log('에러났쥬', e);
       }
     };
     Users();
