@@ -2,7 +2,8 @@
 
 import axios from 'axios';
 
-const token = 'token';
+const token =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ld2ZhY2VAZGNvLmNvbSIsImlhdCI6MTY2MzkwNzQyMSwiZXhwIjoxNjYzOTExMDIxLCJzdWIiOiIxMDEifQ.DMSLATJj_yzs21eb9-HvedBnmOnazJ3SKWDCQcE_gMo';
 
 async function getUsers() {
   try {

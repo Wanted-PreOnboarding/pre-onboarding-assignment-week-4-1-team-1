@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FormControlLabel, Paper } from '@mui/material';
 import styled from '@emotion/styled';
 import LabelAndContentBox from '../../../components/LabelAndContentBox';
+import { maskingName, maskingPhoneNumber } from '../../../utils/masking';
 
 const UserInfo = ({ user }) => {
   const [userInfo, setUserInfo] = useState({});
@@ -41,14 +42,18 @@ const UserInfo = ({ user }) => {
             <td>
               <img src={photo} alt="프로필 사진" />
             </td>
-            <LabelAndContentBox label="이름" content={name} />
+            <LabelAndContentBox label="이름" content={name && maskingName(name)} />
             <LabelAndContentBox label="이메일" content={email} />
             <LabelAndContentBox label="나이" content={age} />
             <LabelAndContentBox label="성별" content={gender} />
           </tr>
           <tr>
             <LabelAndContentBox label="생년월일" content={birth_date} contentColSpan="3" />
-            <LabelAndContentBox label="전화번호" content={phone_number} contentColSpan="5" />
+            <LabelAndContentBox
+              label="전화번호"
+              content={phone_number && maskingPhoneNumber(phone_number)}
+              contentColSpan="5"
+            />
           </tr>
           <tr>
             <LabelAndContentBox label="주소" content={address} contentColSpan="3" />
