@@ -27,7 +27,6 @@ function Users() {
   const searchParams = useLocation().search;
   const query = qs.parse(searchParams);
   const curPage = query._page;
-  console.log(searchParams);
 
   let totalUsers = 0;
   const LIMIT = '4';
@@ -41,6 +40,7 @@ function Users() {
 
     setUserList(res.data);
     totalUsers = res.headers['x-total-count'];
+    console.log(totalUsers);
   };
 
   const navigate = useNavigate();
@@ -74,12 +74,15 @@ function Users() {
               <StyledTableCell align="center">수신동의 여부</StyledTableCell>
               <StyledTableCell align="center">활성화 여부</StyledTableCell>
               <StyledTableCell align="center">가입일</StyledTableCell>
+              <StyledTableCell align="center">삭제</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {userList.length
               ? userList.map((user, key) => {
-                  return <TableBodyList user={user} key={key} curPage={curPage} />;
+                  return (
+                    <TableBodyList user={user} key={key} curPage={curPage} getUsers={getUsers} />
+                  );
                 })
               : '데이터없음'}
           </TableBody>
