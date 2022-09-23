@@ -60,13 +60,15 @@ function UsersSearch() {
         <Table aria-label="customized table">
           <TableHeadList />
           <TableBody>
-            {userList.length
-              ? userList[curPage].map((user, key) => {
-                  return (
-                    <TableBodyList user={user} key={key} curPage={curPage} getlist={getUsers} />
-                  );
-                })
-              : 'Loading...'}
+            {userList.length ? (
+              userList[curPage].map((user, key) => {
+                return <TableBodyList user={user} key={key} curPage={curPage} getlist={getUsers} />;
+              })
+            ) : (
+              <tr>
+                <td>Loading.....</td>
+              </tr>
+            )}
           </TableBody>
         </Table>
       </TableContainer>

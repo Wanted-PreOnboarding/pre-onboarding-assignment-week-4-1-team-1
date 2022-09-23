@@ -84,13 +84,17 @@ function UsersFilter() {
         <Table aria-label="customized table">
           <TableHeadList />
           <TableBody>
-            {userList.length
-              ? userList[curPage].map((user, key) => {
-                  return (
-                    <TableBodyList user={user} key={key} curPage={curPage} getlist={getUserUuid} />
-                  );
-                })
-              : 'Loading...'}
+            {userList.length ? (
+              userList[curPage].map((user, key) => {
+                return (
+                  <TableBodyList user={user} key={key} curPage={curPage} getlist={getUserUuid} />
+                );
+              })
+            ) : (
+              <tr>
+                <td>Loading.....</td>
+              </tr>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
