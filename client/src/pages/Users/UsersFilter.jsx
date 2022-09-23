@@ -23,46 +23,57 @@ import Stack from '@mui/material/Stack';
 
 const token = getToken();
 
-function Users() {
+function UsersFilter() {
   const [userList, setUserList] = useState([]);
 
   const searchParams = useLocation().search;
   const query = qs.parse(searchParams);
   const curPage = query._page;
+  const checkStaff = query.is_staff;
+  const checkActive = query.is_active;
 
   let totalUsers = 0;
   const LIMIT = '4';
 
+  const getFilterUser = uuidFilterArray => {
+    getUsers().then(res => {
+      const users = res.filter(val => uuidFilterArray.includes(val.uuid));
+      setUserList(users);
+    });
+  };
+
   const getUsers = async () => {
-    const res = await baseUrl.get(`/customers/${searchParams}`, {
+    const res = await baseUrl.get(`/customers`, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    return res.data;
+  };
+
+  const getUuid = async () => {
+    const res = await baseUrl.get(`/userSetting/${searchParams}`, {
       headers: {
         Authorization: 'Bearer ' + token,
       },
     });
 
-    setUserList(res.data);
-    totalUsers = res.headers['x-total-count'];
+    const uuidFilterArray = res.data.map(val => {
+      return val.uuid;
+    });
+
+    getFilterUser(uuidFilterArray);
   };
-
-  const navigate = useNavigate();
-
-  const onChangePage = e => {
-    navigate(`/users/?_page=${e.target.textContent}&_limit=${LIMIT}`);
-  };
-
-  const [pages, setPages] = useState(0);
 
   useEffect(() => {
-    getUsers().then(() => {
-      setPages(Math.ceil(totalUsers / +LIMIT));
-    });
+    getUuid();
   }, [searchParams]);
 
   return (
     <Box>
       <SearchBar />
-      <AddUser getUsers={getUsers} />
-      <FilterBotton />
+      <AddUser getUsers={getUuid} />
+      <FilterBotton checkStaff={checkStaff} checkActive={checkActive} />
       <TableContainer component={Paper}>
         <Table aria-label="customized table">
           <TableHead>
@@ -84,21 +95,18 @@ function Users() {
             {userList.length
               ? userList.map((user, key) => {
                   return (
-                    <TableBodyList user={user} key={key} curPage={curPage} getUsers={getUsers} />
+                    <TableBodyList user={user} key={key} curPage={curPage} getUsers={getUuid} />
                   );
                 })
               : '데이터없음'}
           </TableBody>
         </Table>
       </TableContainer>
-      <Stack spacing={1}>
-        <Pagination count={pages} onChange={onChangePage} variant="outlined" shape="rounded" />
-      </Stack>
     </Box>
   );
 }
 
-export default Users;
+export default UsersFilter;
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
