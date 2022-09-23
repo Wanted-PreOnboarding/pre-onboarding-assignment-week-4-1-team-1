@@ -6,6 +6,7 @@ import { getToken } from '../../utils/token';
 import TableBodyList from './components/TableBodyList';
 import SearchBar from './components/SearchBar';
 import AddUser from './components/AddUser';
+import FilterBotton from './components/FilterBotton';
 
 import qs from 'query-string';
 import { Box } from '@mui/material';
@@ -61,6 +62,7 @@ function Users() {
     <Box>
       <SearchBar />
       <AddUser getUsers={getUsers} />
+      <FilterBotton />
       <TableContainer component={Paper}>
         <Table aria-label="customized table">
           <TableHead>
