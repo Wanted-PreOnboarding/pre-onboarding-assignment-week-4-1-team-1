@@ -43,13 +43,13 @@ class AccountService {
     const { data } = await this._fetch.get(`/accounts?q=${word}`, {
       headers: { authorization: `Bearer ${getToken()}` },
     });
-    console.log(data);
+    return data;
   }
   async getAnAccount(id) {
     const { data } = await this._fetch.get(`/accounts/${id}`, {
       headers: { authorization: `Bearer ${getToken()}` },
     });
-    console.log(data);
+    return data;
   }
 }
 
