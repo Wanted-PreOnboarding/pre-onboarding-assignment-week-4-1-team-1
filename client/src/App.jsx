@@ -18,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={token ? <Layout /> : <Auth />}>
           <Route index element={<UserList />} />
+          <Route path="/users/customers" element={<Users />} />
           <Route path="/users" element={<Users />} />
           <Route path="/users/details/:id" element={<UserDetails />} />
           {/**
