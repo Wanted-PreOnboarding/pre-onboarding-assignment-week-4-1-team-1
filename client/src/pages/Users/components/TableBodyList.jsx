@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import baseUrl from '../../../api';
 import { getToken } from '../../../utils/token';
 import { maskingName, maskingPhoneNumber } from '../../../utils/masking';
+import EditUserName from './EditUserName';
 
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
@@ -66,17 +67,23 @@ function TableBodyList({ user, curPage, getUsers }) {
     }
   };
 
-  const onEditUserName = id => {
-    console.log('edit', id);
+  const [isEdit, setIsEdit] = useState(false);
+
+  const onEditModeToggle = () => {
+    setIsEdit(prev => !prev);
   };
 
   return (
     <StyledTableRow>
       <StyledTableCell align="center">
         {maskingName(user.name)}
-        <IconButton onClick={() => onEditUserName(user.id)} aria-label="edit" size="small">
-          <EditIcon fontSize="inherit" />
-        </IconButton>
+        {isEdit ? (
+          <EditUserName user={user} onEditModeToggle={onEditModeToggle} getUsers={getUsers} />
+        ) : (
+          <IconButton onClick={onEditModeToggle} aria-label="edit" size="small">
+            <EditIcon fontSize="inherit" />
+          </IconButton>
+        )}
       </StyledTableCell>
       <StyledTableCell align="center">{accountCount}</StyledTableCell>
       <StyledTableCell align="center">{user.email}</StyledTableCell>
