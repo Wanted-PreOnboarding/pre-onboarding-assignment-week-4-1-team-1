@@ -4,7 +4,7 @@
       "id": 5,
       "uuid": "9d1720b6-fcb1-4c87-bf09-ce1b674f3c59",
       "photo": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/420.jpg",
-      "name": "Ms. Dexter 박밤",
+      "name": "Ms. Dexter 박",
       "email": "_@gmail.com",
       "age": 26,
       "gender_origin": 1,
@@ -1487,6 +1487,38 @@
       "last_login": "2022-03-24T23:31:08.928Z",
       "created_at": "2022-05-06T13:53:30.458Z",
       "updated_at": "2021-09-11T18:14:27.845Z"
+    },
+    {
+      "uuid": "439368ac-27cc-435c-9ad0-6f6fdedcfe4d",
+      "photo": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/420.jpg",
+      "name": "Mingyu-Kang",
+      "email": "kagrin97@gmail.com",
+      "age": "44",
+      "gender_origin": "4",
+      "birth_date": "2022-06-07T16:20",
+      "phone_number": "010-8799-7254",
+      "address": "41, Yongmasan-ro 129",
+      "detail_address": "102-1201",
+      "last_login": "2022-09-23T16:20:28",
+      "created_at": "2022-09-23T16:20:28",
+      "updated_at": "2022-09-23T16:20:28",
+      "id": 101
+    },
+    {
+      "uuid": "d8a2080d-2e22-4322-b37b-38ef917733d9",
+      "photo": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/420.jpg",
+      "name": "test1",
+      "email": "kagrin97@gmail.com",
+      "age": "44",
+      "gender_origin": "4",
+      "birth_date": "2019-02-14T16:25",
+      "phone_number": "010-8799-7254",
+      "address": "41, Yongmasan-ro 129",
+      "detail_address": "디테일이",
+      "last_login": "2022-09-23T16:26:09",
+      "created_at": "2022-09-23T16:26:09",
+      "updated_at": "2022-09-23T16:26:09",
+      "id": 102
     }
   ],
   "users": [

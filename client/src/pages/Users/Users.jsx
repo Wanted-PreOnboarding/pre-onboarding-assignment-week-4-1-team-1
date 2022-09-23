@@ -5,6 +5,7 @@ import baseUrl from '../../api';
 import { getToken } from '../../utils/token';
 import TableBodyList from './components/TableBodyList';
 import SearchBar from './components/SearchBar';
+import AddUser from './components/AddUser';
 
 import qs from 'query-string';
 import { Box } from '@mui/material';
@@ -40,7 +41,6 @@ function Users() {
 
     setUserList(res.data);
     totalUsers = res.headers['x-total-count'];
-    console.log(totalUsers);
   };
 
   const navigate = useNavigate();
@@ -60,6 +60,7 @@ function Users() {
   return (
     <Box>
       <SearchBar />
+      <AddUser getUsers={getUsers} />
       <TableContainer component={Paper}>
         <Table aria-label="customized table">
           <TableHead>
