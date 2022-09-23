@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { LiMIT_ITEM } from '../../utils/itemLimit';
+
 import { useTheme } from '@mui/material/styles';
 import {
   Drawer,
@@ -49,7 +51,7 @@ function SideNavigation({ width, createClickMenuHandler }) {
             <ListItemIcon sx={{ color: 'white' }} />
           </ListItemButton>
         </StyledLink>
-        <StyledLink to="users?_page=1&_limit=4">
+        <StyledLink to={`users?_page=1&_limit=${LiMIT_ITEM}`}>
           <ListItemButton onClick={createClickMenuHandler('사용자')}>
             <ListItemIcon sx={{ color: 'white' }}>
               <PersonIcon />

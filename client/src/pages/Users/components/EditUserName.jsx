@@ -5,7 +5,7 @@ import baseUrl from '../../../api';
 
 const token = getToken();
 
-function EditUserName({ user, onEditModeToggle, getUsers }) {
+function EditUserName({ user, onEditModeToggle, getlist }) {
   const onChangeName = e => {
     setName(e.target.value);
   };
@@ -25,7 +25,7 @@ function EditUserName({ user, onEditModeToggle, getUsers }) {
       }
     );
     onEditModeToggle();
-    getUsers();
+    getlist();
   };
 
   return (
