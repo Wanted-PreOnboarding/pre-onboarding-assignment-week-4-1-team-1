@@ -6,6 +6,7 @@ import UsersList from './pages/Users/UsersList';
 import UsersFilter from './pages/Users/UsersFilter';
 import UsersSearch from './pages/Users/UsersSearch';
 import Layout from './components/Layout';
+import AccountList from './pages/Accounts/AccountList'
 
 import UserDetails from './pages/UserDetail/UserDetails';
 

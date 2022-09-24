@@ -16,3 +16,13 @@ export const maskingName = strName => {
 export const maskingPhoneNumber = phoneNumber => {
   return phoneNumber.replace(/\-.*\-/, '-****-');
 };
+
+export const maskingAccount = account => {
+  const prefix = account.slice(0, 2);
+  const surfix = account.slice(-2);
+  let body = "";
+  for (let i = 0; i < account.length - 4; i++) {
+    body += "*";
+  }
+  return [prefix, body, surfix].join("");
+}

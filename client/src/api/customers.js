@@ -10,4 +10,7 @@ const getACustomersById = id => instance.get(`/customers/${id}`);
 
 const getACustomerSetting = uuid => instance.get(`/customers/?uuid=${uuid}`);
 
-export { getCustomersByPage, searchCustomers, getACustomersById, getACustomerSetting };
+const getCustomersAll = () => instance.get('customers');
+
+export { getCustomersByPage, searchCustomers, getACustomersById, getACustomerSetting, getCustomersAll };
+
