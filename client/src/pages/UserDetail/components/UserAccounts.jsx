@@ -25,25 +25,27 @@ const UserAccounts = ({ accounts }) => {
   }, [accounts]);
 
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>계좌 이름</TableCell>
-            <TableCell align="right">은행명</TableCell>
-            <TableCell align="right">계좌상태</TableCell>
-            <TableCell align="right">평가손익</TableCell>
-            <TableCell align="right">수익률</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {accountsInfo.map(account => (
-            <Row key={account.uuid} account={account} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Paper square elevation={2}>
+      <TableContainer component={Paper}>
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              <TableCell />
+              <TableCell>계좌 이름</TableCell>
+              <TableCell align="right">은행명</TableCell>
+              <TableCell align="right">계좌상태</TableCell>
+              <TableCell align="right">평가손익</TableCell>
+              <TableCell align="right">수익률</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {accountsInfo.map(account => (
+              <Row key={account.uuid} account={account} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Paper>
   );
 };
 

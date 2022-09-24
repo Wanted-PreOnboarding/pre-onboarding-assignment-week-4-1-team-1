@@ -37,7 +37,6 @@ const UserInfo = ({ user, userSetting }) => {
   return (
     <ContainerPaper square elevation={2}>
       <table>
-        <caption>회원정보</caption>
         <tbody>
           <tr>
             <th>프로필 사진</th>
@@ -121,8 +120,6 @@ const UserInfo = ({ user, userSetting }) => {
 export default UserInfo;
 
 const ContainerPaper = styled(Paper)`
-  margin: 10px;
-
   & > table {
     margin: 0 auto;
     width: 100%;

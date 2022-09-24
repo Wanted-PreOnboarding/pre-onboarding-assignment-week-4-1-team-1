@@ -4,6 +4,7 @@ import UserInfo from './components/UserInfo';
 import UserAccounts from './components/UserAccounts';
 import { getACustomersById, getACustomerSetting } from '../../api/customers';
 import { getAnAccountById } from '../../api/account';
+import styled from '@emotion/styled';
 
 const UserDetails = () => {
   const params = useParams();
@@ -31,11 +32,21 @@ const UserDetails = () => {
   }, []);
 
   return (
-    <>
+    <UserDetailContainer>
+      <Title>회원 정보</Title>
       <UserInfo user={user} userSetting={userSetting} />
+      <Title>회원 계좌 정보</Title>
       <UserAccounts accounts={accounts} />
-    </>
+    </UserDetailContainer>
   );
 };
 
 export default UserDetails;
+
+const Title = styled.h2`
+  margin-left: 20px;
+`;
+
+const UserDetailContainer = styled.section`
+  margin: 10px;
+`;
