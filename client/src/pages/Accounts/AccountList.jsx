@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import styled from '@emotion/styled';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import styled from '@emotion/styled';
+import { Box } from '@mui/material';
+import { blueGrey } from '@mui/material/colors';
 
 import AccountListTable from './components/AccountListTable'
 import Pagination from '@mui/material/Pagination';
@@ -9,12 +11,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Selector from './components/Selector';
 
-import { Box } from '@mui/material';
-import { blueGrey } from '@mui/material/colors';
-
 import { getAccountsByPage } from '../../api/account'
 import { getCustomersAll } from '../../api/customers'
-
 import { BROKERS as brokers } from '../../constant/broker'
 import { ACCOUNT_STATE as accountsState, IS_ACTIVE_ACCOUNT as isActiveAccount } from '../../constant/accounts'
 
@@ -30,7 +28,7 @@ function AccountList() {
 
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  
+
   const page = searchParams.get('page') || 1;
   const isActive = searchParams.get('isActive') || "";
   const brokerId = searchParams.get('brokerId') || "";
@@ -43,8 +41,8 @@ function AccountList() {
       setTotalPages(Math.ceil(accounts.meta.totalLength / 10));
     })
     getCustomersAll().then(customers => {
-      setCustomers(customers.data)
-    }) 
+      setCustomers(customers.data);
+    })
   }, [page, search, brokerId, isActive, status]);
 
   const onChangePage = (e) => {
@@ -70,10 +68,6 @@ function AccountList() {
     setLocalStatus("")
   }
 
-  // todo 
-  // loading, error state handling
-  if (!accountList) return <div>Loading...</div>
-
   return (
   <Box sx={{ backgroundColor: blueGrey[200], padding: "15px"}}>
     <Card>
@@ -90,13 +84,15 @@ function AccountList() {
         </FlexWrapper>
       </FormContainer>
     </Card>
-    <AccountListTable accountList={accountList} customers={customers}/>
+    {(accountList.length && customers.length) ? <AccountListTable accountList={accountList} customers={customers}/> : <div></div>}
     <Card>
-      <PaginationContatiner>
-        <Stack spacing={1}>
-          <Pagination count={totalPages} onChange={onChangePage} variant="outlined" shape="rounded" />
-        </Stack>
-      </PaginationContatiner>
+      {(accountList.length && customers.length) ? (
+        <PaginationContatiner>
+          <Stack spacing={1}>
+            <Pagination count={totalPages} onChange={onChangePage} variant="outlined" shape="rounded" hidePrevButton hideNextButton/>
+          </Stack>
+        </PaginationContatiner>
+      ) : <p>데이터가 존재하지 않습니다.</p>}
     </Card>
   </Box>
   )
