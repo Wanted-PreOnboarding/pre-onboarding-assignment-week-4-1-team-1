@@ -15,6 +15,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { transformToBrokerResource } from '../../../utils/bankFormatter';
 import { convertNumToStr } from '../../../utils/statusFormatter';
+import { moneyFormatter } from '../../../utils/moneyFormatter';
 
 const UserAccounts = ({ accounts }) => {
   const [accountsInfo, setAccountsInfo] = useState([]);
@@ -56,6 +57,7 @@ function Row(props) {
     account.broker_id,
     account.number
   );
+
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -69,9 +71,14 @@ function Row(props) {
         </TableCell>
         <TableCell align="right">{brokerName}</TableCell>
         <TableCell align="right">{account.status && convertNumToStr(account.status)}</TableCell>
-        <TableCell align="right">{(account.assets - account.payments).toFixed(2)}</TableCell>
         <TableCell align="right">
-          {(((account.assets - account.payments) / account.payments) * 100).toFixed(2)}%
+          {moneyFormatter((account.assets - account.payments).toFixed(2))}
+        </TableCell>
+        <TableCell align="right">
+          {moneyFormatter(
+            (((account.assets - account.payments) / account.payments) * 100).toFixed(2)
+          )}
+          %
         </TableCell>
       </TableRow>
       <TableRow>
@@ -98,8 +105,8 @@ function Row(props) {
                       {account.is_active ? '활성화됨' : '비활성화됨'}
                     </TableCell>
                     <TableCell>{formattedAccount}</TableCell>
-                    <TableCell align="right">{account.payments}</TableCell>
-                    <TableCell align="right">{account.assets}</TableCell>
+                    <TableCell align="right">{moneyFormatter(account.payments)}</TableCell>
+                    <TableCell align="right">{moneyFormatter(account.assets)}</TableCell>
                     <TableCell align="right">{account.updated_at?.slice(0, 16)}</TableCell>
                     <TableCell align="right">{account.created_at?.slice(0, 16)}</TableCell>
                   </TableRow>
