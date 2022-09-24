@@ -6,10 +6,11 @@ class AccountService {
     this._fetch = instance;
   }
 
-  async getAccountsByPage(page, filters) {
+  async getAccountsByPage(page, search, filters) {
     let query = `accounts?_page=${page}&_limit=${this._limit}`;
     const { isActive, brokerId, status } = filters;
 
+    if (search) query += `&q=${search}`;
     if (isActive) query += `&is_acitve=${isActive}`;
     if (brokerId) query += `&broker_id=${brokerId}`;
     if (status) query += `&status=${status}`;
