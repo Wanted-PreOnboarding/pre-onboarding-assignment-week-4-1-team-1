@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Auth from './pages/Auth';
 import Users from './pages/Users/Users';
 import Layout from './components/Layout';
+import AccountList from './pages/Accounts/AccountList'
 
 import UserDetails from './pages/UserDetail/UserDetails';
 import UserList from './temp/UserList';
@@ -21,6 +22,7 @@ function App() {
           <Route path="/users/customers" element={<Users />} />
           <Route path="/users" element={<Users />} />
           <Route path="/users/details/:id" element={<UserDetails />} />
+          <Route path='/accounts' element={<AccountList />} />
         </Route>
       </Routes>
     </div>
