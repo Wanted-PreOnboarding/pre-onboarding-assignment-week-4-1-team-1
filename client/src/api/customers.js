@@ -8,4 +8,6 @@ const searchCustomers = word => instance.get(`customers/?q=${word}`);
 
 const getACustomersById = id => instance.get(`customers/${id}`);
 
-export { getCustomersByPage, searchCustomers, getACustomersById };
+const getCustomersAll = () => instance.get('customers');
+
+export { getCustomersByPage, searchCustomers, getACustomersById, getCustomersAll };
