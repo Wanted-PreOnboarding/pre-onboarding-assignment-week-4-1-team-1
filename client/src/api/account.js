@@ -1,8 +1,8 @@
 import instance from './index';
 import accountService from '../services/account';
 
-const getAccountsByPage = (page = 1, filters = {}) =>
-  accountService.getAccountsByPage(page, filters);
+const getAccountsByPage = (page = 1, search, filters = {}) =>
+  accountService.getAccountsByPage(page, search, filters);
 
 const searchAccounts = word => instance.get(`accounts/?q=${word}`);
 
