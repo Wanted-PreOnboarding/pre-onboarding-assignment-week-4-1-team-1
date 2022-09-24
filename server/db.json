@@ -1553,36 +1553,36 @@
       "updated_at": "2021-09-11T18:14:27.845Z"
     },
     {
-      "uuid": "439368ac-27cc-435c-9ad0-6f6fdedcfe4d",
+      "uuid": "b3c784c4-cc6b-4b64-9bcc-ac281aeb29e1",
       "photo": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/420.jpg",
-      "name": "Mingyu-Kang",
+      "name": "ㄱㄱㄱㄱㄱ",
       "email": "kagrin97@gmail.com",
       "age": "44",
       "gender_origin": "4",
-      "birth_date": "2022-06-07T16:20",
+      "birth_date": "2022-06-02T22:05",
       "phone_number": "010-8799-7254",
       "address": "41, Yongmasan-ro 129",
-      "detail_address": "102-1201",
-      "last_login": "2022-09-23T16:20:28",
-      "created_at": "2022-09-23T16:20:28",
-      "updated_at": "2022-09-23T16:20:28",
-      "id": 101
+      "detail_address": "414141",
+      "last_login": "2022-09-24T22:05:35",
+      "created_at": "2022-09-24T22:05:35",
+      "updated_at": "2022-09-24T22:05:35",
+      "id": 103
     },
     {
-      "uuid": "d8a2080d-2e22-4322-b37b-38ef917733d9",
+      "uuid": "3958ef26-e4d1-47e3-a902-a903a9ed0ee8",
       "photo": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/420.jpg",
-      "name": "test1",
+      "name": "ㅁㄻㄹasdf",
       "email": "kagrin97@gmail.com",
       "age": "44",
       "gender_origin": "4",
-      "birth_date": "2019-02-14T16:25",
+      "birth_date": "2022-06-02T22:10",
       "phone_number": "010-8799-7254",
       "address": "41, Yongmasan-ro 129",
-      "detail_address": "디테일이",
-      "last_login": "2022-09-23T16:26:09",
-      "created_at": "2022-09-23T16:26:09",
-      "updated_at": "2022-09-23T16:26:09",
-      "id": 102
+      "detail_address": "412123",
+      "last_login": "2022-09-24T22:11:08",
+      "created_at": "2022-09-24T22:11:08",
+      "updated_at": "2022-09-24T22:11:08",
+      "id": 104
     }
   ],
   "users": [
@@ -2602,6 +2602,26 @@
       "is_staff": false,
       "created_at": "2019-11-29T14:32:52.686Z",
       "updated_at": "2020-09-02T05:34:23.096Z"
+    },
+    {
+      "uuid": "b3c784c4-cc6b-4b64-9bcc-ac281aeb29e1",
+      "allow_marketing_push": false,
+      "allow_invest_push": false,
+      "is_active": false,
+      "is_staff": false,
+      "created_at": "2022-09-24T22:05:35",
+      "updated_at": "2022-09-24T22:05:35",
+      "id": 98299
+    },
+    {
+      "uuid": "3958ef26-e4d1-47e3-a902-a903a9ed0ee8",
+      "allow_marketing_push": false,
+      "allow_invest_push": false,
+      "is_active": false,
+      "is_staff": false,
+      "created_at": "2022-09-24T22:11:08",
+      "updated_at": "2022-09-24T22:11:08",
+      "id": 98300
     }
   ],
   "accounts": [

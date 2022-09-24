@@ -37,7 +37,6 @@ const UserInfo = ({ user, userSetting }) => {
   return (
     <ContainerPaper square elevation={2}>
       <table>
-        <caption>회원정보</caption>
         <tbody>
           <tr>
             <th>프로필 사진</th>
@@ -121,12 +120,9 @@ const UserInfo = ({ user, userSetting }) => {
 export default UserInfo;
 
 const ContainerPaper = styled(Paper)`
-  margin: 10px;
-
   & > table {
     margin: 0 auto;
     width: 100%;
-    border: 1px solid #219ebc;
     border-collapse: collapse;
   }
 
@@ -137,13 +133,13 @@ const ContainerPaper = styled(Paper)`
 
   & th {
     background-color: #023047;
-    border: 1px solid #219ebc;
-    color: #fb8500;
+    border: 1px solid rgba(224, 224, 224, 1);
+    color: #fff;
     min-width: 50px;
   }
 
   & td {
-    border: 1px solid #219ebc;
+    border: 1px solid rgba(224, 224, 224, 1);
     min-width: 80px;
     text-align: center;
   }

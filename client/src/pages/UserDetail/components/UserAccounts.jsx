@@ -15,8 +15,12 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { transformToBrokerResource } from '../../../utils/bankFormatter';
 import { convertNumToStr } from '../../../utils/statusFormatter';
+import { moneyFormatter } from '../../../utils/moneyFormatter';
+import styled from '@emotion/styled';
+import { getIsProfit, changeColor } from '../../../utils/getIsProfit';
+import { maskingAccount } from '../../../utils/masking';
 
-const UserAccounts = ({ accounts }) => {
+const UserAccounts = ({ accounts, status }) => {
   const [accountsInfo, setAccountsInfo] = useState([]);
 
   useEffect(() => {
@@ -24,25 +28,33 @@ const UserAccounts = ({ accounts }) => {
   }, [accounts]);
 
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>계좌 이름</TableCell>
-            <TableCell align="right">은행명</TableCell>
-            <TableCell align="right">계좌상태</TableCell>
-            <TableCell align="right">평가손익</TableCell>
-            <TableCell align="right">수익률</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {accountsInfo.map(account => (
-            <Row key={account.uuid} account={account} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Paper square elevation={2}>
+      <TableContainer component={Paper}>
+        {accountsInfo.length === 0 ? (
+          '사용자의 계좌가 0개 입니다.'
+        ) : (
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableBar>
+                <TableName />
+                <TableName>계좌 이름</TableName>
+                <TableName align="center">활성화 여부</TableName>
+                <TableName align="right">은행명</TableName>
+                <TableName align="right">계좌상태</TableName>
+                <TableName align="right">평가손익</TableName>
+                <TableName align="right">수익률</TableName>
+              </TableBar>
+            </TableHead>
+            <TableBody>
+              {accountsInfo.map(account => {
+                if (status === '') return <Row key={account.uuid} account={account} />;
+                if (account.status === status) return <Row key={account.uuid} account={account} />;
+              })}
+            </TableBody>
+          </Table>
+        )}
+      </TableContainer>
+    </Paper>
   );
 };
 
@@ -54,8 +66,11 @@ function Row(props) {
 
   const { brokerName, formattedAccount } = transformToBrokerResource(
     account.broker_id,
-    account.number
+    maskingAccount(account.number)
   );
+
+  // const disabled = { pointerEvents: 'none', opacity: '0.4' };
+
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -67,24 +82,32 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {account.name}
         </TableCell>
+        <TableCell align="center">{account.is_active ? 'O' : 'X'}</TableCell>
         <TableCell align="right">{brokerName}</TableCell>
         <TableCell align="right">{account.status && convertNumToStr(account.status)}</TableCell>
-        <TableCell align="right">{(account.assets - account.payments).toFixed(2)}</TableCell>
-        <TableCell align="right">
-          {(((account.assets - account.payments) / account.payments) * 100).toFixed(2)}%
-        </TableCell>
+        <TableName className={getIsProfit(account.assets, account.payments)} align="right">
+          {moneyFormatter((account.assets - account.payments).toFixed(2))}
+        </TableName>
+        <TableName
+          className={changeColor(
+            (((account.assets - account.payments) / account.payments) * 100).toFixed(2)
+          )}
+          align="right"
+        >
+          {moneyFormatter(
+            (((account.assets - account.payments) / account.payments) * 100).toFixed(2)
+          )}
+          %
+        </TableName>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={10}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              {/* <Typography variant="h6" gutterBottom component="div">
-                상세정보
-              </Typography> */}
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>활성화 여부</TableCell>
+                    <TableCell />
                     <TableCell>계좌번호</TableCell>
                     <TableCell align="right">임금금액</TableCell>
                     <TableCell align="right">평가금액</TableCell>
@@ -94,12 +117,10 @@ function Row(props) {
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    <TableCell component="th" scope="row">
-                      {account.is_active ? '활성화됨' : '비활성화됨'}
-                    </TableCell>
+                    <TableCell component="th" scope="row" />
                     <TableCell>{formattedAccount}</TableCell>
-                    <TableCell align="right">{account.payments}</TableCell>
-                    <TableCell align="right">{account.assets}</TableCell>
+                    <TableCell align="right">{moneyFormatter(account.payments)}</TableCell>
+                    <TableCell align="right">{moneyFormatter(account.assets)}</TableCell>
                     <TableCell align="right">{account.updated_at?.slice(0, 16)}</TableCell>
                     <TableCell align="right">{account.created_at?.slice(0, 16)}</TableCell>
                   </TableRow>
@@ -112,3 +133,19 @@ function Row(props) {
     </React.Fragment>
   );
 }
+
+const TableBar = styled(TableRow)`
+  background-color: #023047;
+`;
+
+const TableName = styled(TableCell)`
+  color: #fff;
+
+  &.red {
+    color: red;
+  }
+
+  &.blue {
+    color: blue;
+  }
+`;

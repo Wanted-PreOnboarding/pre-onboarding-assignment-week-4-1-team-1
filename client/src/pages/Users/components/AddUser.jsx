@@ -12,16 +12,38 @@ import { v4 as uuidv4 } from 'uuid';
 
 const token = getToken();
 
-function AddUser({ getUsers }) {
+function AddUser({ getlist }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const newUuid = uuidv4();
+
+  const addUserConfigHandler = () => {
+    return baseUrl.post(
+      `/userSetting`,
+      {
+        uuid: newUuid,
+        allow_marketing_push: false,
+        allow_invest_push: false,
+        is_active: false,
+        is_staff: false,
+        created_at: getTodayTime(),
+        updated_at: getTodayTime(),
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      }
+    );
+  };
 
   const addUserHandler = e => {
     return baseUrl.post(
       `/customers`,
       {
-        uuid: uuidv4(),
+        uuid: newUuid,
         photo: e.target[0].value,
         name: e.target[1].value,
         email: e.target[2].value,
@@ -46,8 +68,9 @@ function AddUser({ getUsers }) {
   const onSubmitUser = e => {
     e.preventDefault();
     addUserHandler(e);
+    addUserConfigHandler();
     setOpen(false);
-    getUsers();
+    getlist();
   };
 
   return (
@@ -61,25 +84,25 @@ function AddUser({ getUsers }) {
       >
         <Box sx={style}>
           <form onSubmit={onSubmitUser} style={{ display: 'flex', flexDirection: 'column' }}>
-            <label for="avatar">사진 url</label>
+            <label htmlFor="avatar">사진 url</label>
             <input type="text" id="avatar" name="avatar" required />
-            <label for="name">사용자 이름</label>
+            <label htmlFor="name">사용자 이름</label>
             <input
               type="text"
               id="name"
               name="name"
               required
-              minlength="4"
-              maxlength="14"
+              minLength="4"
+              maxLength="14"
               size="10"
             />
-            <label for="email">이메일</label>
+            <label htmlFor="email">이메일</label>
             <input type="email" id="email" size="30" required />
-            <label for="age">나이</label>
+            <label htmlFor="age">나이</label>
             <input type="number" id="age" name="age" min="10" max="100" required />
-            <label for="sex">주민등록상 성별코드</label>
+            <label htmlFor="sex">주민등록상 성별코드</label>
             <input type="number" id="sex" name="sex" min="1" max="4" required />
-            <label for="birthday-time">생년월일시간</label>
+            <label htmlFor="birthday-time">생년월일시간</label>
             <input
               type="datetime-local"
               id="birthday-time"
@@ -88,29 +111,29 @@ function AddUser({ getUsers }) {
               max="2022-06-14T00:00"
               required
             />
-            <label for="phone">휴대폰 번호</label>
+            <label htmlFor="phone">휴대폰 번호</label>
             <small>ex: 123-456-7890</small>
             <input type="tel" id="phone" name="phone" required />
-            <label for="address">주소</label>
+            <label htmlFor="address">주소</label>
             <small>ex: 서울시 분당구</small>
             <input
               type="text"
               id="address"
               name="address"
               required
-              minlength="4"
-              maxlength="20"
+              minLength="4"
+              maxLength="20"
               size="10"
             />
-            <label for="detail">상세주소</label>
+            <label htmlFor="detail">상세주소</label>
             <small>ex: 0622 광명면 Suite 418</small>
             <input
               type="text"
               id="detail"
               name="detail"
               required
-              minlength="4"
-              maxlength="20"
+              minLength="4"
+              maxLength="20"
               size="10"
             />
             <button>사용자 추가</button>

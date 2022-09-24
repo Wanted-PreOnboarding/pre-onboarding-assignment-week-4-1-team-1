@@ -1,10 +1,11 @@
+
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Box } from '@mui/material';
 import { blueGrey } from '@mui/material/colors';
 
-import AccountListTable from './components/AccountListTable'
+import AccountListTable from './components/AccountListTable';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
@@ -17,56 +18,66 @@ import { BROKERS as brokers } from '../../constant/broker'
 import { ACCOUNT_STATE as accountsState, IS_ACTIVE_ACCOUNT as isActiveAccount } from '../../constant/accounts'
 
 function AccountList() {
-  const [customers, setCustomers] = useState("");
-  const [accountList, setAccountList] = useState("");
+  const [customers, setCustomers] = useState('');
+  const [accountList, setAccountList] = useState('');
   const [totalPages, setTotalPages] = useState(0);
 
-  const [search, setSearch] = useState("");
-  const [localBroker, setLocalBroker] = useState("");
-  const [localIsActive, setLocalIsActive] = useState("");
-  const [localStatus, setLocalStatus] = useState("");
+  const [search, setSearch] = useState('');
+  const [localBroker, setLocalBroker] = useState('');
+  const [localIsActive, setLocalIsActive] = useState('');
+  const [localStatus, setLocalStatus] = useState('');
 
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const page = searchParams.get('page') || 1;
-  const isActive = searchParams.get('isActive') || "";
-  const brokerId = searchParams.get('brokerId') || "";
-  const status = searchParams.get('status') || "";
-  const q = searchParams.get('q') || "";
+  const isActive = searchParams.get('isActive') || '';
+  const brokerId = searchParams.get('brokerId') || '';
+  const status = searchParams.get('status') || '';
+  const q = searchParams.get('q') || '';
 
   useEffect(() => {
     getAccountsByPage(page, search, { brokerId, isActive, status }).then(accounts => {
       setAccountList(accounts.data);
       setTotalPages(Math.ceil(accounts.meta.totalLength / 10));
-    })
+    });
     getCustomersAll().then(customers => {
       setCustomers(customers.data);
-    })
+    });
   }, [page, search, brokerId, isActive, status]);
 
-  const onChangePage = (e) => {
-    navigate(`/accounts?page=${e.target.textContent}&q=${q}&isActive=${isActive}&brokerId=${brokerId}&status=${status}`);
-    getAccountsByPage(e.target.textContent, search, { brokerId, isActive, status }).then(accounts => {
-      setAccountList(accounts.data);
-      setTotalPages(Math.ceil(accounts.meta.totalLength / 10));
-    })
-  }
+  const onChangePage = e => {
+    navigate(
+      `/accounts?page=${e.target.textContent}&q=${q}&isActive=${isActive}&brokerId=${brokerId}&status=${status}`
+    );
+    getAccountsByPage(e.target.textContent, search, { brokerId, isActive, status }).then(
+      accounts => {
+        setAccountList(accounts.data);
+        setTotalPages(Math.ceil(accounts.meta.totalLength / 10));
+      }
+    );
+  };
 
   const onSearch = () => {
-    navigate(`/accounts?page=${1}&q=${search}&isActive=${localIsActive}&brokerId=${localBroker}&status=${localStatus}`);
-    getAccountsByPage(1, search, { brokerId : localBroker, isActive : localIsActive, status : localStatus }).then(accounts => {
+    navigate(
+      `/accounts?page=${1}&q=${search}&isActive=${localIsActive}&brokerId=${localBroker}&status=${localStatus}`
+    );
+    getAccountsByPage(1, search, {
+      brokerId: localBroker,
+      isActive: localIsActive,
+      status: localStatus,
+    }).then(accounts => {
       setAccountList(accounts.data);
       setTotalPages(Math.ceil(accounts.meta.totalLength / 10));
-    })
-  }
+    });
+  };
 
   const resetForm = () => {
-    setSearch("")
-    setLocalBroker("")
-    setLocalIsActive("")
-    setLocalStatus("")
-  }
+    setSearch('');
+    setLocalBroker('');
+    setLocalIsActive('');
+    setLocalStatus('');
+  };
 
   return (
   <Box sx={{ backgroundColor: blueGrey[200], padding: "15px"}}>
@@ -98,7 +109,7 @@ function AccountList() {
   )
 }
 
-export default AccountList
+export default AccountList;
 
 const Card = styled.div`
   margin-top: 15px;
@@ -106,21 +117,22 @@ const Card = styled.div`
   background-color: white;
   padding: 15px;
   border-radius: 5px;
-  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
-`
+  box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%),
+    0px 1px 3px 0px rgb(0 0 0 / 12%);
+`;
 const FormContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`
+`;
 const PaginationContatiner = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 const FlexWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;

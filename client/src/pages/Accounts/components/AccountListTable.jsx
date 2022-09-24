@@ -35,11 +35,13 @@ function AccountListTable({ accountList, customers }) {
       <Table aria-label="simple table">
         <TableHead>
           <TableRow>
-            {tableHeaders.map(header => <TableCell align="center">{header}</TableCell>)}
+            {tableHeaders.map(header => (
+              <TableCell align="center">{header}</TableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map(row => (
             <TableRow key={row.uuid}>
               <TableCell align='center'>{brokers[row.broker_id]}</TableCell>
               <TableCell sx={hoverStyle} align='center' onClick={() => {navigate(`/accounts/${row.id}`)}}>{maskingAccount(row.number)}</TableCell>
@@ -55,7 +57,7 @@ function AccountListTable({ accountList, customers }) {
         </TableBody>
       </Table>
     </TableContainer>
-  )
+  );
 }
 
 export default AccountListTable
@@ -66,3 +68,4 @@ const hoverStyle = {
     fontWeight: "600"
   }
 };
+
