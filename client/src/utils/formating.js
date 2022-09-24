@@ -1,6 +1,8 @@
-export const getAssetPattern = (number) => {
-  return Math.floor(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+export const getAssetPattern = number => {
+  return Math.floor(number)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
 
 export function getSimpleDatePattern(date) {
   const formattedDate = new Date(date);

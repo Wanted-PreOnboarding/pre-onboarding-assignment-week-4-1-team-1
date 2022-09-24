@@ -20,9 +20,9 @@ export const maskingPhoneNumber = phoneNumber => {
 export const maskingAccount = account => {
   const prefix = account.slice(0, 2);
   const surfix = account.slice(-2);
-  let body = "";
+  let body = '';
   for (let i = 0; i < account.length - 4; i++) {
-    body += "*";
+    body += '*';
   }
-  return [prefix, body, surfix].join("");
-}
+  return [prefix, body, surfix].join('');
+};
