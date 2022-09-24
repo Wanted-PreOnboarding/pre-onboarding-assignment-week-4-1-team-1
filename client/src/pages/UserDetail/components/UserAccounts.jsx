@@ -18,6 +18,7 @@ import { convertNumToStr } from '../../../utils/statusFormatter';
 import { moneyFormatter } from '../../../utils/moneyFormatter';
 import styled from '@emotion/styled';
 import { getIsProfit, changeColor } from '../../../utils/getIsProfit';
+import { maskingAccount } from '../../../utils/masking';
 
 const UserAccounts = ({ accounts, status }) => {
   const [accountsInfo, setAccountsInfo] = useState([]);
@@ -37,6 +38,7 @@ const UserAccounts = ({ accounts, status }) => {
               <TableBar>
                 <TableName />
                 <TableName>계좌 이름</TableName>
+                <TableName align="center">활성화 여부</TableName>
                 <TableName align="right">은행명</TableName>
                 <TableName align="right">계좌상태</TableName>
                 <TableName align="right">평가손익</TableName>
@@ -64,8 +66,10 @@ function Row(props) {
 
   const { brokerName, formattedAccount } = transformToBrokerResource(
     account.broker_id,
-    account.number
+    maskingAccount(account.number)
   );
+
+  // const disabled = { pointerEvents: 'none', opacity: '0.4' };
 
   return (
     <React.Fragment>
@@ -78,6 +82,7 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {account.name}
         </TableCell>
+        <TableCell align="center">{account.is_active ? 'O' : 'X'}</TableCell>
         <TableCell align="right">{brokerName}</TableCell>
         <TableCell align="right">{account.status && convertNumToStr(account.status)}</TableCell>
         <TableName className={getIsProfit(account.assets, account.payments)} align="right">
@@ -96,13 +101,13 @@ function Row(props) {
         </TableName>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={10}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>활성화 여부</TableCell>
+                    <TableCell />
                     <TableCell>계좌번호</TableCell>
                     <TableCell align="right">임금금액</TableCell>
                     <TableCell align="right">평가금액</TableCell>
@@ -112,9 +117,7 @@ function Row(props) {
                 </TableHead>
                 <TableBody>
                   <TableRow>
-                    <TableCell component="th" scope="row">
-                      {account.is_active ? '활성화됨' : '비활성화됨'}
-                    </TableCell>
+                    <TableCell component="th" scope="row" />
                     <TableCell>{formattedAccount}</TableCell>
                     <TableCell align="right">{moneyFormatter(account.payments)}</TableCell>
                     <TableCell align="right">{moneyFormatter(account.assets)}</TableCell>
