@@ -28,8 +28,20 @@ function UsersFilter() {
 
   const searchParams = useLocation().search;
   const query = qs.parse(searchParams);
-  const checkStaff = query.is_staff;
-  const checkActive = query.is_active;
+
+  let checkStaff;
+  if (query.is_staff !== undefined) {
+    checkStaff = JSON.parse(query.is_staff);
+  } else {
+    checkStaff = undefined;
+  }
+
+  let checkActive;
+  if (query.is_active !== undefined) {
+    checkActive = JSON.parse(query.is_active);
+  } else {
+    checkActive = undefined;
+  }
 
   const [pages, setPages] = useState(0);
 

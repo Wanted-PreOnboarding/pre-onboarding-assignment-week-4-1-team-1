@@ -31,6 +31,7 @@ const checkMarketingPush = async uuid => {
       Authorization: 'Bearer ' + token,
     },
   });
+
   return res.data[0].allow_marketing_push;
 };
 
@@ -40,6 +41,7 @@ const checkIsActive = async uuid => {
       Authorization: 'Bearer ' + token,
     },
   });
+
   return res.data[0].is_active;
 };
 
