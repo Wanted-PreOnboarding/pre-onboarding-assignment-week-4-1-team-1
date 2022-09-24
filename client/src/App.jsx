@@ -10,6 +10,7 @@ import Layout from './components/Layout';
 import UserDetails from './pages/UserDetail/UserDetails';
 
 import { getToken } from './utils/token';
+import AccountDetail from './pages/AccountDetail/AccountDetail';
 
 function App() {
   const token = getToken();
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={token ? <Layout /> : <Auth />}>
           <Route path="accounts" element={<></>} />
+          <Route path="accounts/:id" element={<AccountDetail />} />
           <Route path="/users/userSetting" element={<UsersFilter />} />
           <Route path="/users/customers" element={<UsersSearch />} />
           <Route path="/users" element={<UsersList />} />
