@@ -42,7 +42,7 @@ function SideNavigation({ width, createClickMenuHandler }) {
       </Toolbar>
       <Divider />
       <List>
-        <StyledLink to="accounts">
+        <StyledLink to="accounts?page=1&q=&isActive=&brokerId=&status=">
           <ListItemButton>
             <ListItemIcon sx={{ color: 'white' }}>
               <AccountBalanceIcon />

@@ -20,7 +20,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={token ? <Layout /> : <Auth />}>
-          <Route path="accounts" element={<></>} />
+          <Route path="accounts" element={<AccountList />} />
           <Route path="accounts/:id" element={<AccountDetail />} />
           <Route path="/users/userSetting" element={<UsersFilter />} />
           <Route path="/users/customers" element={<UsersSearch />} />
