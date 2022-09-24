@@ -57,7 +57,7 @@ function FilterBotton({ checkActive, checkStaff }) {
         onChange={onStaff}
         control={<Checkbox />}
         label="스태프"
-        checked={checkStaff}
+        checked={checkStaff ?? false}
       />
       <FormControlLabel
         ref={refActive}
@@ -65,7 +65,7 @@ function FilterBotton({ checkActive, checkStaff }) {
         onChange={onActive}
         control={<Checkbox />}
         label="활성화"
-        checked={checkActive}
+        checked={checkActive ?? false}
       />
     </FormGroup>
   );
