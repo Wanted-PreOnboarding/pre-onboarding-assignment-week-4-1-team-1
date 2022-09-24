@@ -123,7 +123,6 @@ const ContainerPaper = styled(Paper)`
   & > table {
     margin: 0 auto;
     width: 100%;
-    border: 1px solid #219ebc;
     border-collapse: collapse;
   }
 

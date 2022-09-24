@@ -17,9 +17,9 @@ import { transformToBrokerResource } from '../../../utils/bankFormatter';
 import { convertNumToStr } from '../../../utils/statusFormatter';
 import { moneyFormatter } from '../../../utils/moneyFormatter';
 import styled from '@emotion/styled';
-import { changeColor } from '../../../utils/changeColor';
+import { getIsProfit, changeColor } from '../../../utils/getIsProfit';
 
-const UserAccounts = ({ accounts }) => {
+const UserAccounts = ({ accounts, status }) => {
   const [accountsInfo, setAccountsInfo] = useState([]);
 
   useEffect(() => {
@@ -29,23 +29,28 @@ const UserAccounts = ({ accounts }) => {
   return (
     <Paper square elevation={2}>
       <TableContainer component={Paper}>
-        <Table aria-label="collapsible table">
-          <TableHead>
-            <TableBar>
-              <TableName />
-              <TableName>계좌 이름</TableName>
-              <TableName align="right">은행명</TableName>
-              <TableName align="right">계좌상태</TableName>
-              <TableName align="right">평가손익</TableName>
-              <TableName align="right">수익률</TableName>
-            </TableBar>
-          </TableHead>
-          <TableBody>
-            {accountsInfo.map(account => (
-              <Row key={account.uuid} account={account} />
-            ))}
-          </TableBody>
-        </Table>
+        {accountsInfo.length === 0 ? (
+          '사용자의 계좌가 0개 입니다.'
+        ) : (
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableBar>
+                <TableName />
+                <TableName>계좌 이름</TableName>
+                <TableName align="right">은행명</TableName>
+                <TableName align="right">계좌상태</TableName>
+                <TableName align="right">평가손익</TableName>
+                <TableName align="right">수익률</TableName>
+              </TableBar>
+            </TableHead>
+            <TableBody>
+              {accountsInfo.map(account => {
+                if (status === '') return <Row key={account.uuid} account={account} />;
+                if (account.status === status) return <Row key={account.uuid} account={account} />;
+              })}
+            </TableBody>
+          </Table>
+        )}
       </TableContainer>
     </Paper>
   );
@@ -62,11 +67,6 @@ function Row(props) {
     account.number
   );
 
-  // changeColor(account.assets - account.payments);
-  // moneyFormatter((((account.assets - account.payments) / account.payments) * 100).toFixed(2));
-  // moneyFormatter(account.payments);
-  // moneyFormatter(account.assets);
-
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -80,7 +80,7 @@ function Row(props) {
         </TableCell>
         <TableCell align="right">{brokerName}</TableCell>
         <TableCell align="right">{account.status && convertNumToStr(account.status)}</TableCell>
-        <TableName className={changeColor(account.assets - account.payments)} align="right">
+        <TableName className={getIsProfit(account.assets, account.payments)} align="right">
           {moneyFormatter((account.assets - account.payments).toFixed(2))}
         </TableName>
         <TableName
@@ -99,9 +99,6 @@ function Row(props) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-              {/* <Typography variant="h6" gutterBottom component="div">
-                상세정보
-              </Typography> */}
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
