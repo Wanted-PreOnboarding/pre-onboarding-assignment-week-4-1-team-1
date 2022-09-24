@@ -6,6 +6,8 @@ const getCustomersByPage = (page = 1, filters = {}) =>
 
 const searchCustomers = word => instance.get(`customers/?q=${word}`);
 
-const getACustomersById = id => instance.get(`customers/${id}`);
+const getACustomersById = id => instance.get(`/customers/${id}`);
 
-export { getCustomersByPage, searchCustomers, getACustomersById };
+const getACustomerSetting = uuid => instance.get(`/customers/?uuid=${uuid}`);
+
+export { getCustomersByPage, searchCustomers, getACustomersById, getACustomerSetting };

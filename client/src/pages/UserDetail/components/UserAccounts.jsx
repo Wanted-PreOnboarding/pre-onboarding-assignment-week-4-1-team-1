@@ -9,11 +9,12 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { transformToBrokerResource } from '../../../utils/bankFormatter';
+import { convertNumToStr } from '../../../utils/statusFormatter';
 
 const UserAccounts = ({ accounts }) => {
   const [accountsInfo, setAccountsInfo] = useState([]);
@@ -23,13 +24,6 @@ const UserAccounts = ({ accounts }) => {
   }, [accounts]);
 
   return (
-    // <div>
-    //   <ul>
-    //     {accountInfo.map(account => (
-    //       <li key={account.id}>{account.name}</li>
-    //     ))}
-    //   </ul>
-    // </div>
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
@@ -58,6 +52,10 @@ function Row(props) {
   const { account } = props;
   const [open, setOpen] = React.useState(false);
 
+  const { brokerName, formattedAccount } = transformToBrokerResource(
+    account.broker_id,
+    account.number
+  );
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -69,9 +67,9 @@ function Row(props) {
         <TableCell component="th" scope="row">
           {account.name}
         </TableCell>
-        <TableCell align="right">{account.broker_id}</TableCell>
-        <TableCell align="right">{account.status}</TableCell>
-        <TableCell align="right">{account.assets - account.payments}</TableCell>
+        <TableCell align="right">{brokerName}</TableCell>
+        <TableCell align="right">{account.status && convertNumToStr(account.status)}</TableCell>
+        <TableCell align="right">{(account.assets - account.payments).toFixed(2)}</TableCell>
         <TableCell align="right">
           {(((account.assets - account.payments) / account.payments) * 100).toFixed(2)}%
         </TableCell>
@@ -99,25 +97,12 @@ function Row(props) {
                     <TableCell component="th" scope="row">
                       {account.is_active ? '활성화됨' : '비활성화됨'}
                     </TableCell>
-                    <TableCell>{account.number}</TableCell>
+                    <TableCell>{formattedAccount}</TableCell>
                     <TableCell align="right">{account.payments}</TableCell>
                     <TableCell align="right">{account.assets}</TableCell>
-                    <TableCell align="right">{account.updated_at}</TableCell>
-                    <TableCell align="right">{account.created_at}</TableCell>
+                    <TableCell align="right">{account.updated_at?.slice(0, 16)}</TableCell>
+                    <TableCell align="right">{account.created_at?.slice(0, 16)}</TableCell>
                   </TableRow>
-
-                  {/* {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.date}
-                      </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
-                    </TableRow>
-                  ))} */}
                 </TableBody>
               </Table>
             </Box>
