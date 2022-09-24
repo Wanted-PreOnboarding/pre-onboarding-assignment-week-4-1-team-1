@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import styled from '@emotion/styled';
+
+import React, { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import styled from '@emotion/styled';
+import { Box } from '@mui/material';
+import { blueGrey } from '@mui/material/colors';
 
 import AccountListTable from './components/AccountListTable';
 import Pagination from '@mui/material/Pagination';
@@ -9,17 +12,10 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Selector from './components/Selector';
 
-import { Box } from '@mui/material';
-import { blueGrey } from '@mui/material/colors';
-
-import { getAccountsByPage } from '../../api/account';
-import { getCustomersAll } from '../../api/customers';
-
-import { BROKERS as brokers } from '../../constant/broker';
-import {
-  ACCOUNT_STATE as accountsState,
-  IS_ACTIVE_ACCOUNT as isActiveAccount,
-} from '../../constant/accounts';
+import { getAccountsByPage } from '../../api/account'
+import { getCustomersAll } from '../../api/customers'
+import { BROKERS as brokers } from '../../constant/broker'
+import { ACCOUNT_STATE as accountsState, IS_ACTIVE_ACCOUNT as isActiveAccount } from '../../constant/accounts'
 
 function AccountList() {
   const [customers, setCustomers] = useState('');
@@ -83,67 +79,34 @@ function AccountList() {
     setLocalStatus('');
   };
 
-  // todo
-  // loading, error state handling
-  if (!accountList) return <div>Loading...</div>;
-
   return (
-    <Box sx={{ backgroundColor: blueGrey[200], padding: '15px' }}>
-      <Card>
-        <FormContainer>
-          <FlexWrapper>
-            <TextField
-              sx={{ m: 1, width: '100ch' }}
-              id="standard-basic"
-              label="검색"
-              variant="standard"
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
-          </FlexWrapper>
-          <FlexWrapper>
-            <Selector
-              label="증권사"
-              value={localBroker}
-              setValue={e => setLocalBroker(e.target.value)}
-              selectList={brokers}
-            />
-            <Selector
-              label="활성화여부"
-              value={localIsActive}
-              setValue={e => setLocalIsActive(e.target.value)}
-              selectList={isActiveAccount}
-            />
-            <Selector
-              label="계좌 상태"
-              value={localStatus}
-              setValue={e => setLocalStatus(e.target.value)}
-              selectList={accountsState}
-            />
-            <Button variant="text" onClick={onSearch}>
-              검색
-            </Button>
-            <Button variant="text" onClick={resetForm}>
-              검색초기화
-            </Button>
-          </FlexWrapper>
-        </FormContainer>
-      </Card>
-      <AccountListTable accountList={accountList} customers={customers} />
-      <Card>
+  <Box sx={{ backgroundColor: blueGrey[200], padding: "15px"}}>
+    <Card>
+      <FormContainer>
+        <FlexWrapper>
+          <TextField sx={{ m: 1, width: '100ch' }} id="standard-basic" label="검색" variant="standard" value={search} onChange={(e) => setSearch(e.target.value)}/>
+        </FlexWrapper>
+        <FlexWrapper>
+          <Selector label="증권사" value={localBroker} setValue={(e) => setLocalBroker(e.target.value)} selectList={brokers}/>
+          <Selector label="활성화여부" value={localIsActive} setValue={(e) => setLocalIsActive(e.target.value)} selectList={isActiveAccount}/>
+          <Selector label="계좌 상태" value={localStatus} setValue={(e) => setLocalStatus(e.target.value)} selectList={accountsState}/>
+          <Button variant="text" onClick={onSearch}>검색</Button>
+          <Button variant="text" onClick={resetForm}>검색초기화</Button>
+        </FlexWrapper>
+      </FormContainer>
+    </Card>
+    {(accountList.length && customers.length) ? <AccountListTable accountList={accountList} customers={customers}/> : <div></div>}
+    <Card>
+      {(accountList.length && customers.length) ? (
         <PaginationContatiner>
           <Stack spacing={1}>
-            <Pagination
-              count={totalPages}
-              onChange={onChangePage}
-              variant="outlined"
-              shape="rounded"
-            />
+            <Pagination count={totalPages} onChange={onChangePage} variant="outlined" shape="rounded" hidePrevButton hideNextButton/>
           </Stack>
         </PaginationContatiner>
-      </Card>
-    </Box>
-  );
+      ) : <p>데이터가 존재하지 않습니다.</p>}
+    </Card>
+  </Box>
+  )
 }
 
 export default AccountList;
