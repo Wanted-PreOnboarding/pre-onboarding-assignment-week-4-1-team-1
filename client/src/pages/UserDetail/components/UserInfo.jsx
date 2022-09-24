@@ -16,8 +16,6 @@ const UserInfo = ({ user, userSetting }) => {
   }, [user, userSetting]);
 
   const {
-    id,
-    uuid,
     photo,
     name,
     email,
@@ -31,8 +29,6 @@ const UserInfo = ({ user, userSetting }) => {
     created_at,
     updated_at,
   } = userInfo;
-
-  console.log(userSettingInfo);
 
   const { allow_marketing_push, allow_invest_push, is_active, is_staff } = userSettingInfo;
 
@@ -152,11 +148,3 @@ const ContainerPaper = styled(Paper)`
     text-align: center;
   }
 `;
-
-// const LabelAndContentBox = styled.div`
-//   width: 100px;
-//   height: 100px;
-//   display: flex;
-//   justify-content: space-around;
-//   align-items: center;
-// `;

@@ -9,7 +9,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -25,13 +24,6 @@ const UserAccounts = ({ accounts }) => {
   }, [accounts]);
 
   return (
-    // <div>
-    //   <ul>
-    //     {accountInfo.map(account => (
-    //       <li key={account.id}>{account.name}</li>
-    //     ))}
-    //   </ul>
-    // </div>
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
@@ -111,19 +103,6 @@ function Row(props) {
                     <TableCell align="right">{account.updated_at?.slice(0, 16)}</TableCell>
                     <TableCell align="right">{account.created_at?.slice(0, 16)}</TableCell>
                   </TableRow>
-
-                  {/* {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.date}
-                      </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
-                      </TableCell>
-                    </TableRow>
-                  ))} */}
                 </TableBody>
               </Table>
             </Box>

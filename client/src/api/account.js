@@ -6,6 +6,6 @@ const getAccountsByPage = (page = 1, filters = {}) =>
 
 const searchAccounts = word => instance.get(`accounts/?q=${word}`);
 
-const getAnAccountById = id => instance.get(`accounts/${id}`);
+const getAnAccountById = id => instance.get(`/accounts/?user_id=${id}`);
 
 export { getAccountsByPage, searchAccounts, getAnAccountById };

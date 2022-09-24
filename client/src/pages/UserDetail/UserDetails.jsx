@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getUser, getAccount, getUserSetting } from '../../temp/api';
 import { useParams } from 'react-router-dom';
 import UserInfo from './components/UserInfo';
 import UserAccounts from './components/UserAccounts';
+import { getACustomersById, getACustomerSetting } from '../../api/customers';
+import { getAnAccountById } from '../../api/account';
 
 const UserDetails = () => {
   const params = useParams();
@@ -14,14 +15,14 @@ const UserDetails = () => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const userData = await getUser(idx);
+        const { data } = await getACustomersById(idx);
         const [accountData, userSettingData] = await Promise.all([
-          getAccount(userData.id),
-          getUserSetting(userData.uuid),
+          getAnAccountById(data.id),
+          getACustomerSetting(data.uuid),
         ]);
-        setUser(userData);
-        setAccounts(accountData);
-        setUserSetting(userSettingData[0]);
+        setUser(data);
+        setAccounts(accountData.data);
+        setUserSetting(userSettingData.data[0]);
       } catch (e) {
         throw e;
       }
