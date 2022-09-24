@@ -134,13 +134,13 @@ const ContainerPaper = styled(Paper)`
 
   & th {
     background-color: #023047;
-    border: 1px solid #219ebc;
-    color: #fb8500;
+    border: 1px solid rgba(224, 224, 224, 1);
+    color: #fff;
     min-width: 50px;
   }
 
   & td {
-    border: 1px solid #219ebc;
+    border: 1px solid rgba(224, 224, 224, 1);
     min-width: 80px;
     text-align: center;
   }

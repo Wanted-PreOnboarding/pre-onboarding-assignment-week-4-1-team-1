@@ -16,6 +16,8 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { transformToBrokerResource } from '../../../utils/bankFormatter';
 import { convertNumToStr } from '../../../utils/statusFormatter';
 import { moneyFormatter } from '../../../utils/moneyFormatter';
+import styled from '@emotion/styled';
+import { changeColor } from '../../../utils/changeColor';
 
 const UserAccounts = ({ accounts }) => {
   const [accountsInfo, setAccountsInfo] = useState([]);
@@ -29,14 +31,14 @@ const UserAccounts = ({ accounts }) => {
       <TableContainer component={Paper}>
         <Table aria-label="collapsible table">
           <TableHead>
-            <TableRow>
-              <TableCell />
-              <TableCell>계좌 이름</TableCell>
-              <TableCell align="right">은행명</TableCell>
-              <TableCell align="right">계좌상태</TableCell>
-              <TableCell align="right">평가손익</TableCell>
-              <TableCell align="right">수익률</TableCell>
-            </TableRow>
+            <TableBar>
+              <TableName />
+              <TableName>계좌 이름</TableName>
+              <TableName align="right">은행명</TableName>
+              <TableName align="right">계좌상태</TableName>
+              <TableName align="right">평가손익</TableName>
+              <TableName align="right">수익률</TableName>
+            </TableBar>
           </TableHead>
           <TableBody>
             {accountsInfo.map(account => (
@@ -60,6 +62,11 @@ function Row(props) {
     account.number
   );
 
+  // changeColor(account.assets - account.payments);
+  // moneyFormatter((((account.assets - account.payments) / account.payments) * 100).toFixed(2));
+  // moneyFormatter(account.payments);
+  // moneyFormatter(account.assets);
+
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -73,15 +80,20 @@ function Row(props) {
         </TableCell>
         <TableCell align="right">{brokerName}</TableCell>
         <TableCell align="right">{account.status && convertNumToStr(account.status)}</TableCell>
-        <TableCell align="right">
+        <TableName className={changeColor(account.assets - account.payments)} align="right">
           {moneyFormatter((account.assets - account.payments).toFixed(2))}
-        </TableCell>
-        <TableCell align="right">
+        </TableName>
+        <TableName
+          className={changeColor(
+            (((account.assets - account.payments) / account.payments) * 100).toFixed(2)
+          )}
+          align="right"
+        >
           {moneyFormatter(
             (((account.assets - account.payments) / account.payments) * 100).toFixed(2)
           )}
           %
-        </TableCell>
+        </TableName>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -121,3 +133,19 @@ function Row(props) {
     </React.Fragment>
   );
 }
+
+const TableBar = styled(TableRow)`
+  background-color: #023047;
+`;
+
+const TableName = styled(TableCell)`
+  color: #fff;
+
+  &.red {
+    color: red;
+  }
+
+  &.blue {
+    color: blue;
+  }
+`;
