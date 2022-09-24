@@ -11,7 +11,7 @@ class AccountService {
     const { isActive, brokerId, status } = filters;
 
     if (search) query += `&q=${search}`;
-    if (isActive) query += `&is_acitve=${isActive}`;
+    if (isActive) query += `&is_active=${isActive}`;
     if (brokerId) query += `&broker_id=${brokerId}`;
     if (status) query += `&status=${status}`;
 
