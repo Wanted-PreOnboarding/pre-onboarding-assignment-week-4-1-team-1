@@ -1,22 +1,6 @@
 {
   "customers": [
     {
-      "id": 1,
-      "uuid": "c7981dca-8446-426f-855b-b1c7948ceeee",
-      "photo": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1061.jpg",
-      "name": "Lula 육",
-      "email": "_66@yahoo.co.kr",
-      "age": 62,
-      "gender_origin": 3,
-      "birth_date": "1982-11-18T04:23:48.521Z",
-      "phone_number": "010-9268-3807",
-      "address": "Philippines 구리군",
-      "detail_address": "821 신길읍 Suite 287",
-      "last_login": "2022-05-04T10:04:52.106Z",
-      "created_at": "2019-04-04T16:53:38.024Z",
-      "updated_at": "2021-04-20T13:52:11.394Z"
-    },
-    {
       "id": 2,
       "uuid": "ef11a8c8-8353-4691-a6a9-861c87f79955",
       "photo": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/567.jpg",
@@ -1569,19 +1553,19 @@
       "id": 103
     },
     {
-      "uuid": "3958ef26-e4d1-47e3-a902-a903a9ed0ee8",
+      "uuid": "c4c9d1d6-10c4-4c80-95d6-ddfe0f04f3aa",
       "photo": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/420.jpg",
-      "name": "ㅁㄻㄹasdf",
+      "name": "Mingyu-Kangda",
       "email": "kagrin97@gmail.com",
       "age": "44",
       "gender_origin": "4",
-      "birth_date": "2022-06-02T22:10",
+      "birth_date": "2022-05-31T14:53",
       "phone_number": "010-8799-7254",
       "address": "41, Yongmasan-ro 129",
-      "detail_address": "412123",
-      "last_login": "2022-09-24T22:11:08",
-      "created_at": "2022-09-24T22:11:08",
-      "updated_at": "2022-09-24T22:11:08",
+      "detail_address": "4444444444",
+      "last_login": "2022-09-25T14:53:37",
+      "created_at": "2022-09-25T14:53:37",
+      "updated_at": "2022-09-25T14:53:37",
       "id": 104
     }
   ],
@@ -2622,6 +2606,46 @@
       "created_at": "2022-09-24T22:11:08",
       "updated_at": "2022-09-24T22:11:08",
       "id": 98300
+    },
+    {
+      "uuid": "c8d6e628-4525-4eb2-aa35-581e943f9e5a",
+      "allow_marketing_push": false,
+      "allow_invest_push": false,
+      "is_active": false,
+      "is_staff": false,
+      "created_at": "2022-09-25T14:51:10",
+      "updated_at": "2022-09-25T14:51:10",
+      "id": 98301
+    },
+    {
+      "uuid": "ccabf7c4-cea4-4bfb-b585-7dc4088e39ff",
+      "allow_marketing_push": false,
+      "allow_invest_push": false,
+      "is_active": false,
+      "is_staff": false,
+      "created_at": "2022-09-25T14:52:28",
+      "updated_at": "2022-09-25T14:52:28",
+      "id": 98302
+    },
+    {
+      "uuid": "c4c9d1d6-10c4-4c80-95d6-ddfe0f04f3aa",
+      "allow_marketing_push": false,
+      "allow_invest_push": false,
+      "is_active": false,
+      "is_staff": false,
+      "created_at": "2022-09-25T14:53:37",
+      "updated_at": "2022-09-25T14:53:37",
+      "id": 98303
+    },
+    {
+      "uuid": "ed3a5e12-f349-49ca-89d1-020807f3c38c",
+      "allow_marketing_push": false,
+      "allow_invest_push": false,
+      "is_active": false,
+      "is_staff": false,
+      "created_at": "2022-09-25T14:56:07",
+      "updated_at": "2022-09-25T14:56:07",
+      "id": 98304
     }
   ],
   "accounts": [

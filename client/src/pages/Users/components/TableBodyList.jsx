@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import baseUrl from '../../../api';
-import { getToken } from '../../../utils/token';
 import { maskingName, maskingPhoneNumber } from '../../../utils/masking';
+import { getUserSettingInfo } from '../../../api/userSetting';
+import { getAnAccountById } from '../../../api/account';
+import { deletCustomersById } from '../../../api/customers';
 import EditUserName from './EditUserName';
 
 import { styled } from '@mui/material/styles';
@@ -13,62 +14,40 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-const token = getToken();
-
-const getAccountCount = async userId => {
-  const res = await baseUrl.get(`/accounts/?user_id=${userId}`, {
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-  });
-
-  return res.data.length;
-};
-
-const checkMarketingPush = async uuid => {
-  const res = await baseUrl.get(`/userSetting/?uuid=${uuid}`, {
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-  });
-
-  return res.data[0].allow_marketing_push;
-};
-
-const checkIsActive = async uuid => {
-  const res = await baseUrl.get(`/userSetting/?uuid=${uuid}`, {
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-  });
-
-  return res.data[0].is_active;
-};
-
 function TableBodyList({ user, curPage, getlist }) {
   const [accountCount, setAccountCount] = useState(0);
   const [marketing, setMarketing] = useState('X');
   const [isActive, setIsActive] = useState('X');
 
+  const getAccountCount = async userId => {
+    await getAnAccountById(userId).then(res => {
+      setAccountCount(res.data.length);
+    });
+  };
+
+  const checkMarketingPush = async uuid => {
+    await getUserSettingInfo(uuid).then(res => {
+      const isMarketingPush = res.data[0].allow_marketing_push;
+      isMarketingPush === true ? setMarketing('O') : setMarketing('X');
+    });
+  };
+
+  const checkIsActive = async uuid => {
+    await getUserSettingInfo(uuid).then(res => {
+      const isCheckActive = res.data[0].is_active;
+      isCheckActive === true ? setIsActive('O') : setIsActive('X');
+    });
+  };
+
   useEffect(() => {
-    getAccountCount(user.id).then(res => setAccountCount(res));
-
-    checkMarketingPush(user.uuid).then(res => {
-      res === true ? setMarketing('O') : setMarketing('X');
-    });
-
-    checkIsActive(user.uuid).then(res => {
-      res === true ? setIsActive('O') : setIsActive('X');
-    });
+    getAccountCount(user.id);
+    checkMarketingPush(user.uuid);
+    checkIsActive(user.uuid);
   }, [curPage]);
 
   const onDeleteUser = async id => {
     if (window.confirm('정말 삭제합니까?')) {
-      await baseUrl.delete(`/customers/${id}`, {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
-      });
+      await deletCustomersById(id);
       getlist();
     }
   };

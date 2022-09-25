@@ -1,1 +1,1 @@
-export const LiMIT_ITEM = '5';
+export const LiMIT_ITEM = '2';

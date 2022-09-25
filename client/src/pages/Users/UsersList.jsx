@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import baseUrl from '../../api';
-import { getToken } from '../../utils/token';
+import { getCustomersByPage } from '../../api/customers';
 import { LiMIT_ITEM } from '../../utils/itemLimit';
 
 import TableBodyList from './components/TableBodyList';
@@ -19,8 +18,6 @@ import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
 
-const token = getToken();
-
 function UsersList() {
   const [userList, setUserList] = useState([]);
 
@@ -28,31 +25,23 @@ function UsersList() {
   const query = qs.parse(searchParams);
   const curPage = query._page;
 
-  let totalUsers = 0;
-
   const getUsers = async () => {
-    const res = await baseUrl.get(`/customers/${searchParams}`, {
-      headers: {
-        Authorization: 'Bearer ' + token,
-      },
+    getCustomersByPage(curPage).then(userInfo => {
+      setUserList(userInfo.data);
+      setPages(Math.ceil(userInfo.meta.totalLength / LiMIT_ITEM));
     });
-
-    setUserList(res.data);
-    totalUsers = res.headers['x-total-count'];
   };
 
   const navigate = useNavigate();
 
   const onChangePage = e => {
-    navigate(`/users/?_page=${e.target.textContent}&_limit=${LiMIT_ITEM}`);
+    navigate(`/users?_page=${e.target.textContent}&_limit=${LiMIT_ITEM}`);
   };
 
   const [pages, setPages] = useState(0);
 
   useEffect(() => {
-    getUsers().then(() => {
-      setPages(Math.ceil(totalUsers / +LiMIT_ITEM));
-    });
+    getUsers();
   }, [searchParams]);
 
   return (

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import baseUrl from '../../api';
-import { getToken } from '../../utils/token';
 import { divisionList } from '../../utils/divisionList';
 import { LiMIT_ITEM } from '../../utils/itemLimit';
+import { getCustomersAll } from '../../api/customers';
+import { getUserSettingUuid } from '../../api/userSetting';
 
 import TableBodyList from './components/TableBodyList';
 import SearchBar from './components/SearchBar';
@@ -21,8 +21,6 @@ import Pagination from '@mui/material/Pagination';
 
 import qs from 'query-string';
 
-const token = getToken();
-
 function UsersFilter() {
   const [userList, setUserList] = useState([]);
 
@@ -30,51 +28,29 @@ function UsersFilter() {
   const query = qs.parse(searchParams);
 
   let checkStaff;
-  if (query.is_staff !== undefined) {
-    checkStaff = JSON.parse(query.is_staff);
-  } else {
-    checkStaff = undefined;
-  }
-
   let checkActive;
-  if (query.is_active !== undefined) {
-    checkActive = JSON.parse(query.is_active);
-  } else {
-    checkActive = undefined;
-  }
+
+  query.is_staff === 'true' ? (checkStaff = true) : (checkStaff = undefined);
+  query.is_active === 'true' ? (checkActive = true) : (checkActive = undefined);
 
   const [pages, setPages] = useState(0);
 
   const getFilterUser = uuidFilterArray => {
-    getUserList().then(res => {
-      const users = res.filter(val => uuidFilterArray.includes(val.uuid));
+    getCustomersAll().then(res => {
+      const users = res.data.filter(val => uuidFilterArray.includes(val.uuid));
       const li = divisionList(users, +LiMIT_ITEM);
       setPages(li.length);
       setUserList(li);
     });
   };
 
-  const getUserList = async () => {
-    const res = await baseUrl.get(`/customers`, {
-      headers: {
-        Authorization: 'Bearer ' + token,
-      },
-    });
-    return res.data;
-  };
-
   const getUserUuid = async () => {
-    const res = await baseUrl.get(`/userSetting/${searchParams}`, {
-      headers: {
-        Authorization: 'Bearer ' + token,
-      },
+    getUserSettingUuid(searchParams).then(res => {
+      const uuidFilterArray = res.data.map(val => {
+        return val.uuid;
+      });
+      getFilterUser(uuidFilterArray);
     });
-
-    const uuidFilterArray = res.data.map(val => {
-      return val.uuid;
-    });
-
-    getFilterUser(uuidFilterArray);
   };
 
   const [curPage, setCurPage] = useState(0);

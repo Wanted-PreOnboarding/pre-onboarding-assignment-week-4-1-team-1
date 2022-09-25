@@ -1,16 +1,13 @@
 import { useState } from 'react';
 
-import baseUrl from '../../../api';
-import { getToken } from '../../../utils/token';
-import { getTodayTime } from '../../../utils/getTodayTime';
+import { addUser } from '../../../api/customers';
+import { addUserSetting } from '../../../api/userSetting';
 
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 
 import { v4 as uuidv4 } from 'uuid';
-
-const token = getToken();
 
 function AddUser({ getlist }) {
   const [open, setOpen] = useState(false);
@@ -20,49 +17,11 @@ function AddUser({ getlist }) {
   const newUuid = uuidv4();
 
   const addUserConfigHandler = () => {
-    return baseUrl.post(
-      `/userSetting`,
-      {
-        uuid: newUuid,
-        allow_marketing_push: false,
-        allow_invest_push: false,
-        is_active: false,
-        is_staff: false,
-        created_at: getTodayTime(),
-        updated_at: getTodayTime(),
-      },
-      {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
-      }
-    );
+    addUserSetting({ uuid: newUuid });
   };
 
   const addUserHandler = e => {
-    return baseUrl.post(
-      `/customers`,
-      {
-        uuid: newUuid,
-        photo: e.target[0].value,
-        name: e.target[1].value,
-        email: e.target[2].value,
-        age: e.target[3].value,
-        gender_origin: e.target[4].value,
-        birth_date: e.target[5].value,
-        phone_number: e.target[6].value,
-        address: e.target[7].value,
-        detail_address: e.target[8].value,
-        last_login: getTodayTime(),
-        created_at: getTodayTime(),
-        updated_at: getTodayTime(),
-      },
-      {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
-      }
-    );
+    addUser({ uuid: newUuid, e });
   };
 
   const onSubmitUser = e => {
