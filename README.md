@@ -19,6 +19,8 @@
   
 ## 1. 데모 영상
 
+![Sep-25-2022 11-45-08](https://user-images.githubusercontent.com/85447054/192125982-86c37dec-7184-4ab6-9c77-8951e4420665.gif)
+
 ## 2. 실행 방법
 
 ```bash
