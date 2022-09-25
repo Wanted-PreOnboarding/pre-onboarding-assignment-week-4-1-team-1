@@ -25,7 +25,7 @@ function FilterBotton({ checkActive, checkStaff }) {
       if (isActive) {
         navigate(`/users/userSetting/?is_active=true`);
       } else {
-        navigate(`/users/?_page=1&_limit=4`);
+        navigate(`/users?_page=1&_limit=4`);
       }
     }
   };
@@ -44,7 +44,7 @@ function FilterBotton({ checkActive, checkStaff }) {
       if (isStaff) {
         navigate(`/users/userSetting/?is_staff=true`);
       } else {
-        navigate(`/users/?_page=1&_limit=4`);
+        navigate(`/users?_page=1&_limit=4`);
       }
     }
   };

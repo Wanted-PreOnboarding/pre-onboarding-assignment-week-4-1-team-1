@@ -10,6 +10,8 @@ const getACustomersById = id => instance.get(`/customers/${id}`);
 
 const getACustomerSetting = uuid => instance.get(`/customers/?uuid=${uuid}`);
 
+const getUserSettingUuid = searchParams => instance.get(`/userSetting/${searchParams}`);
+
 const getCustomersAll = () => instance.get('customers');
 
 export {
@@ -18,4 +20,5 @@ export {
   getACustomersById,
   getACustomerSetting,
   getCustomersAll,
+  getUserSettingUuid,
 };
