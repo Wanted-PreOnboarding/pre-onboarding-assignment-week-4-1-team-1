@@ -49,14 +49,14 @@
 
   <br/>
 
-| 이름                                          | 개발 내용                                   | 브랜치 이름            |
-| --------------------------------------------- | ------------------------------------------- | ---------------------- |
-| [최홍규(팀장)](https://github.com/gomgun-lab) | 자신 브랜치에 각자 댓글 CRUD 개발           | feat/#6/최홍규         |
-| [강민규](https://github.com/kagrin97)         | 자신 브랜치에 각자 댓글 CRUD 개발           | feat/#2/강민규         |
-| [백승전](https://github.com/BaikSeungJeon)    | 자신 브랜치에 각자 댓글 CRUD 개발, 초기설정 | feat/#4/백승전, master |
-| [김정수](https://github.com/sunpl13)          | 개인 사정으로 인한 불참                     |
-| [류웅선](https://github.com/unsnruu)          | Best로 선정이되어 master브랜치에서 리팩토링 | feat/#7/류웅선, master |
-| [윤여건](https://github.com/kunnyCode)        | 자신 브랜치에 각자 댓글 CRUD 개발           | feat/#1/윤여건         |
+| 이름 | 개발 내용 | 
+| --------------------------------------------- | ------------------------------------------- |
+| [최홍규(팀장)](https://github.com/gomgun-lab) | 계좌 목록 페이지 개발|
+| [김정수](https://github.com/sunpl13)          | 계좌 상세 페이지 개발 |
+| [강민규](https://github.com/kagrin97)         | 사용자 목록 페이지 개발| 
+| [윤여건](https://github.com/kunnyCode)        | 사용자 상세 페이지 개발|
+| [류웅선](https://github.com/unsnruu)          | 레이아웃 개발 + API 모듈화 |
+| [백승전](https://github.com/BaikSeungJeon)    | 로그인 페이지 개발 + API 모듈화 | 
 
   <br/>
   
@@ -65,11 +65,71 @@
 ## 6. 개발 스택
 
 <div>
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white"/>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"/>
+<img src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=mui&logoColor=white"/>
 </div>
 
-<br/>
-<details>
-<summary>  7. 폴더 구조  </summary>
+  <br/>
+  
+## 7. 폴더 구조
 <pre>
+📦src
+ ┣ 📜App.jsx
+ ┣ 📜index.js
+ ┣ 📂api
+ ┃ ┣ 📜account.js
+ ┃ ┣ 📜customers.js
+ ┃ ┗ 📜index.js
+ ┣ 📂components
+ ┃ ┣ 📂Layout
+ ┃ ┃ ┣ 📜Footer.jsx
+ ┃ ┃ ┣ 📜Header.jsx
+ ┃ ┃ ┣ 📜SideNavigation.jsx
+ ┃ ┃ ┗ 📜index.jsx
+ ┃ ┗ 📜LabelAndContentBox.jsx
+ ┣ 📂constant
+ ┃ ┣ 📜accounts.js
+ ┃ ┗ 📜broker.js
+ ┣ 📂pages
+ ┃ ┣ 📂AccountDetail
+ ┃ ┃ ┗ 📜AccountDetail.jsx
+ ┃ ┣ 📂Accounts
+ ┃ ┃ ┣ 📂components
+ ┃ ┃ ┃ ┣ 📜AccountListTable.jsx
+ ┃ ┃ ┃ ┗ 📜Selector.jsx
+ ┃ ┃ ┗ 📜AccountList.jsx
+ ┃ ┣ 📂UserDetail
+ ┃ ┃ ┣ 📂components
+ ┃ ┃ ┃ ┣ 📜UserAccounts.jsx
+ ┃ ┃ ┃ ┗ 📜UserInfo.jsx
+ ┃ ┃ ┗ 📜UserDetails.jsx
+ ┃ ┣ 📂Users
+ ┃ ┃ ┣ 📂components
+ ┃ ┃ ┃ ┣ 📜AddUser.jsx
+ ┃ ┃ ┃ ┣ 📜EditUserName.jsx
+ ┃ ┃ ┃ ┣ 📜FilterBotton.jsx
+ ┃ ┃ ┃ ┣ 📜SearchBar.jsx
+ ┃ ┃ ┃ ┣ 📜TableBodyList.jsx
+ ┃ ┃ ┃ ┗ 📜TableHeadList.jsx
+ ┃ ┃ ┣ 📜UsersFilter.jsx
+ ┃ ┃ ┣ 📜UsersList.jsx
+ ┃ ┃ ┗ 📜UsersSearch.jsx
+ ┃ ┗ 📜Auth.jsx
+ ┣ 📂services
+ ┃ ┣ 📜account.js
+ ┃ ┣ 📜auth.js
+ ┃ ┣ 📜customers.js
+ ┃ ┗ 📜legacy.js
+ ┣ 📂utils
+ ┃ ┣ 📜bankFormatter.js
+ ┃ ┣ 📜divisionList.js
+ ┃ ┣ 📜formating.js
+ ┃ ┣ 📜getIsProfit.js
+ ┃ ┣ 📜getTodayTime.js
+ ┃ ┣ 📜itemLimit.js
+ ┃ ┣ 📜masking.js
+ ┃ ┣ 📜moneyFormatter.js
+ ┃ ┣ 📜statusFormatter.js
+ ┃ ┗ 📜token.js
 </pre>
-</details>
