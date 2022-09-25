@@ -1,8 +1,9 @@
 import instance from '../api/index';
+import { LiMIT_ITEM } from '../utils/itemLimit';
 
 class Customers {
   constructor() {
-    this._limit = 10;
+    this._limit = LiMIT_ITEM;
     this._fetch = instance;
   }
 
