@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { LiMIT_ITEM } from '../../utils/itemLimit';
 
@@ -36,14 +36,14 @@ function SideNavigation({ width, createClickMenuHandler }) {
       PaperProps={{ sx: { backgroundColor: palette.primary.dark, width, color: 'white' } }}
     >
       <Toolbar>
-        <StyledLink to="/">
+        <StyledLink to="/" onClick={createClickMenuHandler('사용자')}>
           <Typography sx={{ fontWeight: 'bold', fontSize: '1.5rem' }}>PREFACE</Typography>
         </StyledLink>
       </Toolbar>
       <Divider />
       <List>
         <StyledLink to="accounts?page=1&q=&isActive=&brokerId=&status=">
-          <ListItemButton>
+          <ListItemButton onClick={createClickMenuHandler('계좌 목록')}>
             <ListItemIcon sx={{ color: 'white' }}>
               <AccountBalanceIcon />
             </ListItemIcon>
