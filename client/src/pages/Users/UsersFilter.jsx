@@ -3,7 +3,8 @@ import { useLocation } from 'react-router-dom';
 
 import { divisionList } from '../../utils/divisionList';
 import { LiMIT_ITEM } from '../../utils/itemLimit';
-import { getCustomersAll, getUserSettingUuid } from '../../api/customers';
+import { getCustomersAll } from '../../api/customers';
+import { getUserSettingUuid } from '../../api/userSetting';
 
 import TableBodyList from './components/TableBodyList';
 import SearchBar from './components/SearchBar';

@@ -1567,22 +1567,6 @@
       "created_at": "2022-09-24T22:05:35",
       "updated_at": "2022-09-24T22:05:35",
       "id": 103
-    },
-    {
-      "uuid": "3958ef26-e4d1-47e3-a902-a903a9ed0ee8",
-      "photo": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/420.jpg",
-      "name": "ㅁㄻㄹasdf",
-      "email": "kagrin97@gmail.com",
-      "age": "44",
-      "gender_origin": "4",
-      "birth_date": "2022-06-02T22:10",
-      "phone_number": "010-8799-7254",
-      "address": "41, Yongmasan-ro 129",
-      "detail_address": "412123",
-      "last_login": "2022-09-24T22:11:08",
-      "created_at": "2022-09-24T22:11:08",
-      "updated_at": "2022-09-24T22:11:08",
-      "id": 104
     }
   ],
   "users": [

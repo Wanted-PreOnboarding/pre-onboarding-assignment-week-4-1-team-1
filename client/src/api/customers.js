@@ -8,9 +8,9 @@ const searchCustomers = word => instance.get(`customers/?q=${word}`);
 
 const getACustomersById = id => instance.get(`/customers/${id}`);
 
-const getACustomerSetting = uuid => instance.get(`/customers/?uuid=${uuid}`);
+const deletCustomersById = id => instance.delete(`/customers/${id}`);
 
-const getUserSettingUuid = searchParams => instance.get(`/userSetting/${searchParams}`);
+const getACustomerSetting = uuid => instance.get(`/customers/?uuid=${uuid}`);
 
 const getCustomersAll = () => instance.get('customers');
 
@@ -18,7 +18,7 @@ export {
   getCustomersByPage,
   searchCustomers,
   getACustomersById,
+  deletCustomersById,
   getACustomerSetting,
   getCustomersAll,
-  getUserSettingUuid,
 };
