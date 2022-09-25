@@ -10,6 +10,8 @@ const getACustomersById = id => instance.get(`/customers/${id}`);
 
 const deletCustomersById = id => instance.delete(`/customers/${id}`);
 
+const updateUserNameById = (id, name) => instance.patch(`/customers/${id}`, { name });
+
 const getACustomerSetting = uuid => instance.get(`/customers/?uuid=${uuid}`);
 
 const getCustomersAll = () => instance.get('customers');
@@ -19,6 +21,7 @@ export {
   searchCustomers,
   getACustomersById,
   deletCustomersById,
+  updateUserNameById,
   getACustomerSetting,
   getCustomersAll,
 };

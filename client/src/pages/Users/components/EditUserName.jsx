@@ -1,9 +1,6 @@
 import { useState } from 'react';
 
-import { getToken } from '../../../utils/token';
-import baseUrl from '../../../api';
-
-const token = getToken();
+import { updateUserNameById } from '../../../api/customers';
 
 function EditUserName({ user, onEditModeToggle, getlist }) {
   const onChangeName = e => {
@@ -13,17 +10,7 @@ function EditUserName({ user, onEditModeToggle, getlist }) {
   const [name, setName] = useState(user.name);
 
   const onEditName = async () => {
-    await baseUrl.patch(
-      `/customers/${user.id}`,
-      {
-        name,
-      },
-      {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
-      }
-    );
+    updateUserNameById(user.id, name);
     onEditModeToggle();
     getlist();
   };
