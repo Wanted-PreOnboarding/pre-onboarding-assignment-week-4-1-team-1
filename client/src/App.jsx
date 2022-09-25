@@ -20,11 +20,12 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={token ? <Layout /> : <Auth />}>
+          <Route index element={<UsersList />} />
+          <Route index path="/users" element={<UsersList />} />
           <Route path="accounts" element={<AccountList />} />
           <Route path="accounts/:id" element={<AccountDetail />} />
           <Route path="/users/userSetting" element={<UsersFilter />} />
           <Route path="/users/customers" element={<UsersSearch />} />
-          <Route path="/users" element={<UsersList />} />
           <Route path="/users/:id" element={<UserDetails />} />
         </Route>
       </Routes>
