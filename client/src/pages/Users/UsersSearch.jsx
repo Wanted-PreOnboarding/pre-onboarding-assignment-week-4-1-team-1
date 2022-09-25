@@ -7,10 +7,8 @@ import { getCustomersByPage } from '../../api/customers';
 import { LiMIT_ITEM } from '../../utils/itemLimit';
 
 import TableBodyList from './components/TableBodyList';
-import SearchBar from './components/SearchBar';
-import AddUser from './components/AddUser';
-import FilterBotton from './components/FilterBotton';
 import TableHeadList from './components/TableHeadList';
+import Header from './components/Header';
 
 import { Box } from '@mui/material';
 import Table from '@mui/material/Table';
@@ -48,9 +46,8 @@ function UsersSearch() {
 
   return (
     <Box>
-      <SearchBar />
-      <AddUser getlist={getUsers} />
-      <FilterBotton />
+      <Header getlist={getUsers} />
+
       <TableContainer component={Paper}>
         <Table aria-label="customized table">
           <TableHeadList />

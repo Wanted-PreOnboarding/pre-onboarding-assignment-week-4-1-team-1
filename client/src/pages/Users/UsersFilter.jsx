@@ -7,10 +7,8 @@ import { getCustomersAll } from '../../api/customers';
 import { getUserSettingUuid } from '../../api/userSetting';
 
 import TableBodyList from './components/TableBodyList';
-import SearchBar from './components/SearchBar';
-import AddUser from './components/AddUser';
-import FilterBotton from './components/FilterBotton';
 import TableHeadList from './components/TableHeadList';
+import Header from './components/Header';
 
 import { Box } from '@mui/material';
 import Table from '@mui/material/Table';
@@ -65,9 +63,7 @@ function UsersFilter() {
 
   return (
     <Box>
-      <SearchBar />
-      <AddUser getlist={getUserUuid} />
-      <FilterBotton checkStaff={checkStaff} checkActive={checkActive} />
+      <Header getlist={getUserUuid} checkStaff={checkStaff} checkActive={checkActive} />
       <TableContainer component={Paper}>
         <Table aria-label="customized table">
           <TableHeadList />
