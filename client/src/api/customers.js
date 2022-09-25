@@ -1,8 +1,8 @@
 import instance from './index';
 import customersService from '../services/customers';
 
-const getCustomersByPage = (page = 1, filters = {}) =>
-  customersService.getCustomersByPage(page, filters);
+const getCustomersByPage = (page = 1, search, filters = {}) =>
+  customersService.getCustomersByPage(page, search, filters);
 
 const searchCustomers = word => instance.get(`customers/?q=${word}`);
 

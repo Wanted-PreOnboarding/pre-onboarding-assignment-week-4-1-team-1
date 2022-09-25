@@ -7,12 +7,13 @@ class Customers {
     this._fetch = instance;
   }
 
-  async getCustomersByPage(page, filters) {
+  async getCustomersByPage(page, search, filters) {
     let query = `customers?_page=${page}&_limit=${this._limit}`;
     const { isActive, isStaff } = filters;
 
     if (isActive) query += `&is_acitve=${isActive}`;
     if (isStaff) query += `&is_staff=${isStaff}`;
+    if (search) query += `&q=${search}`;
 
     const { data, headers } = await this._fetch.get(query);
     const totalLength = headers['x-total-count'];

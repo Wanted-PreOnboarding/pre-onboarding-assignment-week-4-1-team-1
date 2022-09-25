@@ -3,11 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
 
 function SearchBar() {
   const [text, setText] = useState('');
@@ -15,7 +12,7 @@ function SearchBar() {
   const navigate = useNavigate();
 
   const onSearchPage = e => {
-    navigate(`/users/customers/?q=${text}`);
+    navigate(`/users/customers/?_page=1&q=${text}`);
   };
 
   const onChangeText = e => {

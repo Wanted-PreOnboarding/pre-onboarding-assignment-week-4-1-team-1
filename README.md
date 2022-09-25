@@ -1,4 +1,5 @@
 ## <img src='https://user-images.githubusercontent.com/85447054/192123033-0945830c-0aab-45f9-af4f-5f28638612d5.png' width='100'/>
+
 ### [투자 관리 서비스](https://www.fint.co.kr/)의 관리자 기능 구현
 
 ## 목차
@@ -49,14 +50,14 @@
 
   <br/>
 
-| 이름 | 개발 내용 | 
-| --------------------------------------------- | ------------------------------------------- |
-| [최홍규(팀장)](https://github.com/gomgun-lab) | 계좌 목록 페이지 개발|
-| [김정수](https://github.com/sunpl13)          | 계좌 상세 페이지 개발 |
-| [강민규](https://github.com/kagrin97)         | 사용자 목록 페이지 개발| 
-| [윤여건](https://github.com/kunnyCode)        | 사용자 상세 페이지 개발|
-| [류웅선](https://github.com/unsnruu)          | 레이아웃 개발 + API 모듈화 |
-| [백승전](https://github.com/BaikSeungJeon)    | 로그인 페이지 개발 + API 모듈화 | 
+| 이름                                          | 개발 내용                       |
+| --------------------------------------------- | ------------------------------- |
+| [최홍규(팀장)](https://github.com/gomgun-lab) | 계좌 목록 페이지 개발           |
+| [김정수](https://github.com/sunpl13)          | 계좌 상세 페이지 개발           |
+| [강민규](https://github.com/kagrin97)         | 사용자 목록 페이지 개발         |
+| [윤여건](https://github.com/kunnyCode)        | 사용자 상세 페이지 개발         |
+| [류웅선](https://github.com/unsnruu)          | 레이아웃 개발 + API 모듈화      |
+| [백승전](https://github.com/BaikSeungJeon)    | 로그인 페이지 개발 + API 모듈화 |
 
   <br/>
   

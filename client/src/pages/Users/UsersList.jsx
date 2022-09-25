@@ -36,10 +36,6 @@ function UsersList() {
 
   const onChangePage = e => {
     navigate(`/users?_page=${e.target.textContent}&_limit=${LiMIT_ITEM}`);
-    getCustomersByPage(e.target.textContent).then(userInfo => {
-      setUserList(userInfo.data);
-      setPages(Math.ceil(userInfo.meta.totalLength / LiMIT_ITEM));
-    });
   };
 
   const [pages, setPages] = useState(0);

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import baseUrl from '../../api';
-import { getToken } from '../../utils/token';
-import { divisionList } from '../../utils/divisionList';
+import qs from 'query-string';
+
+import { getCustomersByPage } from '../../api/customers';
 import { LiMIT_ITEM } from '../../utils/itemLimit';
 
 import TableBodyList from './components/TableBodyList';
@@ -19,32 +19,27 @@ import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
 
-const token = getToken();
-
 function UsersSearch() {
   const [userList, setUserList] = useState([]);
 
   const searchParams = useLocation().search;
+  const query = qs.parse(searchParams);
+  const search = query.q;
 
   const [pages, setPages] = useState(0);
+  const curPage = query._page;
 
   const getUsers = async () => {
-    const res = await baseUrl.get(`/customers/${searchParams}`, {
-      headers: {
-        Authorization: 'Bearer ' + token,
-      },
+    getCustomersByPage(curPage, search).then(userInfo => {
+      setUserList(userInfo.data);
+      setPages(Math.ceil(userInfo.meta.totalLength / LiMIT_ITEM));
     });
-
-    const users = res.data;
-    const li = divisionList(users, +LiMIT_ITEM);
-    setPages(li.length);
-    setUserList(li);
   };
 
-  const [curPage, setCurPage] = useState(0);
+  const navigate = useNavigate();
 
   const onChangePage = e => {
-    setCurPage(e.target.textContent - 1);
+    navigate(`/users/customers/?_page=${e.target.textContent}&q=${search}`);
   };
 
   useEffect(() => {
@@ -61,7 +56,7 @@ function UsersSearch() {
           <TableHeadList />
           <TableBody>
             {userList.length ? (
-              userList[curPage].map((user, key) => {
+              userList.map((user, key) => {
                 return <TableBodyList user={user} key={key} curPage={curPage} getlist={getUsers} />;
               })
             ) : (
