@@ -9,13 +9,13 @@ import { getUserSettingUuid } from '../../api/userSetting';
 import TableBodyList from './components/TableBodyList';
 import TableHeadList from './components/TableHeadList';
 import Header from './components/Header';
+import Paginations from './components/Paginations';
 
 import { Box } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
-import Pagination from '@mui/material/Pagination';
 
 import qs from 'query-string';
 
@@ -82,7 +82,7 @@ function UsersFilter() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Pagination count={pages} onChange={onChangePage} variant="outlined" shape="rounded" />
+      <Paginations pages={pages} onChangePage={onChangePage} />
     </Box>
   );
 }
