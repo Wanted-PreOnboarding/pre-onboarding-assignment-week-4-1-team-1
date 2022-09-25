@@ -8,9 +8,11 @@ const searchCustomers = word => instance.get(`customers/?q=${word}`);
 
 const getACustomersById = id => instance.get(`/customers/${id}`);
 
-const deletCustomersById = id => instance.delete(`/customers/${id}`);
+const deletCustomersById = id => customersService.deleteCustomers(id);
 
-const updateUserNameById = (id, name) => instance.patch(`/customers/${id}`, { name });
+const updateUserNameById = (id, name) => customersService.updateCustomers(id, name);
+
+const addUser = ({ uuid, e }) => customersService.createCustomers(uuid, e);
 
 const getACustomerSetting = uuid => instance.get(`/customers/?uuid=${uuid}`);
 
@@ -19,6 +21,7 @@ const getCustomersAll = () => instance.get('customers');
 export {
   getCustomersByPage,
   searchCustomers,
+  addUser,
   getACustomersById,
   deletCustomersById,
   updateUserNameById,

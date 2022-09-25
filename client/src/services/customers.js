@@ -1,5 +1,6 @@
 import instance from '../api/index';
 import { LiMIT_ITEM } from '../utils/itemLimit';
+import { getTodayTime } from '../utils/getTodayTime';
 
 class Customers {
   constructor() {
@@ -22,8 +23,23 @@ class Customers {
   }
 
   // 사용자 추가
-  async createCustomers() {
-    const res = await instance.post('/customers');
+  async createCustomers(uuid, e) {
+    console.log(e);
+    const res = await instance.post('/customers', {
+      uuid,
+      photo: e.target[0].value,
+      name: e.target[1].value,
+      email: e.target[2].value,
+      age: e.target[3].value,
+      gender_origin: e.target[4].value,
+      birth_date: e.target[5].value,
+      phone_number: e.target[6].value,
+      address: e.target[7].value,
+      detail_address: e.target[8].value,
+      last_login: getTodayTime(),
+      created_at: getTodayTime(),
+      updated_at: getTodayTime(),
+    });
     return res;
   }
 
@@ -34,8 +50,8 @@ class Customers {
   }
 
   // 사용자명 변경
-  async updateCustomers(id) {
-    const res = await instance.put(`/customers/${id}`);
+  async updateCustomers(id, name) {
+    const res = await instance.patch(`/customers/${id}`, { name });
     return res;
   }
 }
