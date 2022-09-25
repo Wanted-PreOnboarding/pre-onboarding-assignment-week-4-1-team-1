@@ -7,7 +7,7 @@ import Footer from './Footer';
 import SideNavigation from './SideNavigation';
 
 function Layout({ children }) {
-  const [menu, setMenu] = useState('대쉬보드');
+  const [menu, setMenu] = useState('사용자');
 
   const navWidth = 280;
   const width = `calc(100% - ${navWidth}px)`;

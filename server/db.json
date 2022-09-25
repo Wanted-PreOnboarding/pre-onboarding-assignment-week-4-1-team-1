@@ -1555,7 +1555,7 @@
     {
       "uuid": "c4c9d1d6-10c4-4c80-95d6-ddfe0f04f3aa",
       "photo": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/420.jpg",
-      "name": "Mingyu-Kang",
+      "name": "Mingyu-Kangda",
       "email": "kagrin97@gmail.com",
       "age": "44",
       "gender_origin": "4",
@@ -1567,22 +1567,6 @@
       "created_at": "2022-09-25T14:53:37",
       "updated_at": "2022-09-25T14:53:37",
       "id": 104
-    },
-    {
-      "uuid": "ed3a5e12-f349-49ca-89d1-020807f3c38c",
-      "photo": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/420.jpg",
-      "name": "Mingyu-Kang44",
-      "email": "kagrin97@gmail.com",
-      "age": "44",
-      "gender_origin": "4",
-      "birth_date": "2022-05-31T14:56",
-      "phone_number": "010-8799-7254",
-      "address": "41, Yongmasan-ro 129",
-      "detail_address": "102-1201",
-      "last_login": "2022-09-25T14:56:07",
-      "created_at": "2022-09-25T14:56:07",
-      "updated_at": "2022-09-25T14:56:07",
-      "id": 105
     }
   ],
   "users": [
