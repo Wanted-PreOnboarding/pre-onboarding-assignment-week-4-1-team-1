@@ -1,26 +1,46 @@
-## <img src='https://user-images.githubusercontent.com/85447054/192123033-0945830c-0aab-45f9-af4f-5f28638612d5.png' width='100'/>
+# 💰 [투자 관리 서비스](https://www.fint.co.kr/)의 관리자 기능 구현 
 
-### [투자 관리 서비스](https://www.fint.co.kr/)의 관리자 기능 구현
+## 📚 목차
 
-## 목차
+- [1. 데모 영상](#1-데모-영상)
+  - [1-1. Login / LogOut](#1-1-login--logout)
+  - [1-2. 계좌 목록](#1-2-계좌-목록)
+  - [1-3. 사용자 목록](#1-3-사용자-목록)
+  - [1-4. 계좌 상세정보, 사용자 상세정보](#1-4-계좌-상세정보-사용자-상세정보)
+- [2. 실행 방법](#2-실행-방법)
 
-[1. 데모 영상](#1-데모-영상)
+- [3. 과제 소개](#3-과제-소개)
 
-[2. 실행 방법](#2-실행-방법)
+- [4. 팀원 소개](#4-팀원-소개)
 
-[3. 과제 소개](#3-과제-소개)
+- [5. 구현 기능](#5-구현-기능)
+  - [5-1. 계좌 목록, 계좌 구현 기능](#5-1-계좌-목록-계좌-구현-기능)
+  - [5-2. 사용자 목록, 사용자 구현 기능](#5-2-사용자-목록-사용자-구현-기능)
+  - [5-3. 사용자 상세, 계좌 상세](#5-3-사용자-상세-계좌-상세)
+- [6. 개발 스택](#6-개발-스택)
 
-[4. 팀원 소개](#4-팀원-소개)
+- [7. 폴더 구조](#7-폴더-구조)
 
-[5. 구현 기능](#5-구현-기능)
-
-[6. 개발 스택](#6-개발-스택)
-
-[7. 폴더 구조](#7-폴더-구조)
 
 ## 1. 데모 영상
 
-![Sep-25-2022 11-45-08](https://user-images.githubusercontent.com/85447054/192125982-86c37dec-7184-4ab6-9c77-8951e4420665.gif)
+- ### 1-1) Login / LogOut
+
+  <video controls width=60% src="https://user-images.githubusercontent.com/75124028/193403642-aaeb8d5a-0b12-46a6-bcc3-3d14cb67b39d.mp4" ></video>
+
+- ### 1-2) 계좌 목록
+
+  <video controls width=60% src="https://user-images.githubusercontent.com/75124028/193403660-f79945ae-5b2e-4308-bec0-3262c2530e1e.mp4"></video>
+
+- ### 1-3) 사용자 목록
+
+  <video controls width=60% src="https://user-images.githubusercontent.com/75124028/193403670-b5b902f5-4fd0-4fba-ba79-d3d8b9d38ed0.mp4"></video>
+
+- ### 1-4) 계좌 상세정보, 사용자 상세정보
+
+  <video controls width=60% src="https://user-images.githubusercontent.com/75124028/193403691-1ea90997-acf7-43b3-84fa-98466f819e65.mp4"></video>
+  
+<br>
 
 ## 2. 실행 방법
 
@@ -32,24 +52,24 @@
 
 # 실행 방법
 
-# pre-onboarding-assignment-week-4-1-team-1
-> cd server
-# pre-onboarding-assignment-week-4-1-team-1/server
+초기 설정
 > npm install
-> npm start
 
-# pre-onboarding-assignment-week-4-1-team-1
-> cd client
-# pre-onboarding-assignment-week-4-1-team-1/client
-> npm install
-> npm start
+서버 실행
+> npm run server
+
+리액트 실행
+> npm run client
 ```
+<br>
 
 ## 3. 과제 소개
 
-[투자 관리 서비스의 관리자 기능 구현](https://pollen-port-115.notion.site/6eda934f6d804e20bab0de8a0363152b)을 개발합니다.
+투자 관리 서비스의 관리자 기능 구현을 개발합니다.
 
-[구현 기능](#5-구현-기능)은 로그인 기능과 계좌 목록과 상세 내용, 사용자 목록과 상세내용이며, 자세한 내용은 해당 텍스트를 클릭해 주세요.
+계좌 목록, 사용자 목록, 사용자 상세정보, 계좌 상세정보가 구현 되어야합니다.
+
+<br>
 
 ## 4. 팀원 소개
 
@@ -62,71 +82,58 @@
 | [류웅선](https://github.com/unsnruu)          | 레이아웃 개발 + API 모듈화      |
 | [백승전](https://github.com/BaikSeungJeon)    | 로그인 페이지 개발 + API 모듈화 |
 
+<br>
+
 ## 5. 구현 기능
 
-### 1. 화면 구성
+- ## 5-1) 계좌 목록, 계좌 구현 기능
 
-#### 로그인
+  - [x] **고객명(user_name)**: 고객 ID를 참조해 실제 이름이 보여집니다.
+  
+    -  **고객명을 누를 경우 사용자 상세 화면으로 이동**합니다.
+  - [x] **계좌번호(number)** : 앞 뒤 각각 두글자를 제외하고 **나머지는 글자수에 맞게 `*` 글자로
+    마스킹 처리**가 필요합니다.
+  - [x] **계좌상태(status)** : 예시) 운용중, `accountStatus.json` 를 참조하여 실제 이름으로 보여져야 합니다.
+  - [x] **계좌명(name)** : 계좌명입니다.
+  - [x] **평가금액(assets)** : 예시) 123,123,123
+  - [x] **입금금액(payments)** : 예시) 123,123,123
+  - [x] **계좌활성화여부(is_active**) : 계좌 활성화 여부
+  - [x] **계좌개설일(created_at)**
+  - [x] 목록에서 브로커명과 **계좌 활성화 여부, 계좌 상태를 필터링** 할 수 있습니다.
+  - [x] 리스트 페이지에서 **검색이 가능**합니다.
+  - [x] **페이지네이션**이 가능합니다.
+  <br>
 
-#### 레이아웃
+- ## 5-2) 사용자 목록, 사용자 구현 기능
 
-- Header
-- Footer
-- Sider
+  - [x] **고객명(user_name)**: 가운데 글자 마스킹 필요, **두글자일 경우 성을 제외한 이름 마스킹 처리, 4글자 이상일 경우 마스킹 처리 후    앞뒤 한글자만 표기**됩니다.
+  
+    -  **고객명을 누를 경우 사용자 상세화면으로 이동**합니다.
+  - [x] **보유 중인 계좌 수: (해당 API 호출 후 데이터를 정제하여 표기)**
+  - [x] **이메일 주소**
+  - [x] **주민등록상 성별코드 (gender_origin)**
+  - [x] **생년월일 (yyyy-mm-dd) (birth_date)**
+  - [x] **휴대폰 번호 (가운데 4자리 `\***` 로 마스킹 필요) (phone_number)\*\*
+  - [x] **최근로그인 (last_login)**
+  - [x] **혜택 수신 동의 여부 (해당 API 호출 후 데이터를 정제하여 표기) (allow_marketing_push)**
+  - [x] **활성화 여부 (해당 API 호출 후 데이터를 정제하여 표기) (is_active)**
+  - [x] **가입일 (created_at)**
+  - [x] 목록에서 **활성화 여부, 임직원 계좌 여부를 필터링** 할 수 있어야 합니다.
+  - [x] 리스트 페이지에서는 **검색이 가능**해야 합니다.
+    - `json-server` 의 Full-text Search API 를 사용하여 구현합니다.
+    - 예시 : GET [http://localhost:3000/users?q=South](http://localhost:3000/users?q=South)
+  - [x] **페이지네이션**이 가능합니다.
+    - `json-server` 의 Paginate API 를 사용하여 구현합니다.
+    - 예시 : GET [http://localhost:3000/users?\\\_page=1&\\\_limit=20](http://localhost:3000/users?%5C%5C_page=1&%5C%5C_limit=20)
+  - [x] 임의로 **신규 사용자를 추가**할 수 있어야 합니다.
+  - [x] 잘못 생성한 **사용자를 삭제**할 수 있어야 합니다.
+  - [x] 개명을 한 사용자를 위해 **사용자명을 변경**할 수 있어야 합니다.
+  <br>
 
-#### 메뉴
+- ## 5-3) 사용자 상세, 계좌 상세
+  - [x] 각 사용자, 계좌의 상세 페이지는 획득 가능한 대부분의 정보를 표시해주시면 됩니다.
 
-- 계좌 목록
-- 계좌 상세
-- 사용자 목록
-- 사용자 상세
-
-### 2.메뉴 구성
-
-#### 계좌 목록
-
-- **고객명(user_name)**: 고객 ID를 참조해 실제 이름이 보여집니다.
-  - **고객명을 누를 경우 사용자 상세 화면으로 이동**합니다.
-- **계좌번호(number)** : 앞 뒤 각각 두글자를 제외하고 **나머지는 글자수에 맞게 `*` 글자로 마스킹 처리**가 필요합니다.
-- **계좌상태(status)** : 예시) 운용중, `accountStatus.json` 를 참조하여 실제 이름으로 보여져야 합니다.
-- **계좌명(name)** : 계좌명입니다.
-- **평가금액(assets)** : 예시) 123,123,123
-- **입금금액(payments)** : 예시) 123,123,123
-- **계좌활성화여부(is_active**) : 계좌 활성화 여부
-- **계좌개설일(created_at)**
-
-#### 계좌 구현 기능
-
-- 목록에서 브로커명과 **계좌 활성화 여부, 계좌 상태를 필터링** 할 수 있습니다.
-- 리스트 페이지에서 **검색이 가능**합니다.
-- **페이지네이션**이 가능합니다.
-
-#### 사용자 목록
-
-- **고객명(user_name)**: 가운데 글자 마스킹 필요, **두글자일 경우 성을 제외한 이름 마스킹 처리, 4글자 이상일 경우 마스킹 처리 후 앞뒤 한글자만 표기**됩니다.
-  - **고객명을 누를 경우 사용자 상세화면으로 이동**합니다.
-- **보유 중인 계좌 수: (해당 API 호출 후 데이터를 정제하여 표기)**
-- **이메일 주소**
-- **주민등록상 성별코드 (gender_origin)**
-- **생년월일 (yyyy-mm-dd) (birth_date)**
-- **휴대폰 번호 (가운데 4자리 `\***` 로 마스킹 필요) (phone_number)\*\*
-- **최근로그인 (last_login)**
-- **혜택 수신 동의 여부 (해당 API 호출 후 데이터를 정제하여 표기) (allow_marketing_push)**
-- **활성화 여부 (해당 API 호출 후 데이터를 정제하여 표기) (is_active)**
-- **가입일 (created_at)**
-
-#### 사용자 구현 기능
-
-- 목록에서 **활성화 여부, 임직원 계좌 여부를 필터링** 할 수 있어야 합니다.
-- 리스트 페이지에서는 **검색이 가능**해야 합니다.
-  - `json-server` 의 Full-text Search API 를 사용하여 구현합니다.
-  - 예시 : GET [http://localhost:3000/users?q=South](http://localhost:3000/users?q=South)
-- **페이지네이션**이 가능합니다.
-  - `json-server` 의 Paginate API 를 사용하여 구현합니다.
-  - 예시 : GET [http://localhost:3000/users?\\\_page=1&\\\_limit=20](http://localhost:3000/users?%5C%5C_page=1&%5C%5C_limit=20)
-- 임의로 **신규 사용자를 추가**할 수 있어야 합니다.
-- 잘못 생성한 **사용자를 삭제**할 수 있어야 합니다.
-- 개명을 한 사용자를 위해 **사용자명을 변경**할 수 있어야 합니다.
+<br>
 
 ## 6. 개발 스택
 
@@ -135,6 +142,8 @@
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"/>
 <img src="https://img.shields.io/badge/MUI-007FFF?style=for-the-badge&logo=mui&logoColor=white"/>
 </div>
+
+<br>
   
 ## 7. 폴더 구조
 <pre>
